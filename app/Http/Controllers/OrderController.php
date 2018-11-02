@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BookingRequest;
-use Illuminate\Support\Facades\Log;
-use PDF;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class OrderController extends Controller
 {
-    public function __construct()
-    {
-
-    }
-
     public function index(Request $request)
     {
-        $data['title'] = 'List Booking';
+        $data['title'] = 'List Orders';
 
         return view('order.list', $data);
+    }
+
+    public function guppy()
+    {
+        $data['title'] = 'Add Guppy';
+
+        return view('order.guppy', $data);
     }
 
     public function save(BookingRequest $request)

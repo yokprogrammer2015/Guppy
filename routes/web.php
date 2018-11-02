@@ -15,73 +15,23 @@ Auth::routes();
 
 Route::get('/', 'PermissionController@checkLogin');
 
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
 # Permission
 Route::post('login', 'PermissionController@checkLogin');
 
 Route::get('logout', 'PermissionController@logout');
 
 Route::group(['middleware' => 'my_auth'], function () {
-# Dash Board
-    Route::any('dashboard', 'DashboardController@index');
 
-# Booking
-    Route::any('booking/list', 'BookingController@index');
+# Order
+    Route::any('order/list', 'OrderController@index');
 
-    Route::any('booking/boat/{id?}', 'BookingController@boat');
+    Route::any('order/guppy', 'OrderController@guppy');
 
-    Route::any('booking/jointTicket/{id?}', 'BookingController@jointTicket');
+    Route::get('order/remove/{order_id}', 'OrderController@remove');
 
-    Route::any('booking/bus/{id?}', 'BookingController@bus');
-
-    Route::get('booking/remove/{order_id}', 'BookingController@remove');
-
-    Route::post('booking/save', 'BookingController@save');
-
-# Daily Sale Cash
-    Route::any('daily/cash/list', 'DailyCashController@index');
-
-    Route::any('daily/cash/boat', 'DailyCashController@boat');
-
-    Route::any('daily/cash/jointTicket', 'DailyCashController@jointTicket');
-
-    Route::any('daily/cash/bus', 'DailyCashController@bus');
-
-    Route::any('daily/cash/train', 'DailyCashController@train');
-
-    Route::post('daily/cash/save', 'DailyCashController@save');
-
-# Daily Sale Credit
-    Route::any('daily/credit/list', 'DailyCreditController@index');
-
-    Route::any('daily/credit/boat', 'DailyCreditController@boat');
-
-    Route::any('daily/credit/jointTicket', 'DailyCreditController@jointTicket');
-
-    Route::any('daily/credit/bus', 'DailyCreditController@bus');
-
-    Route::any('daily/credit/train', 'DailyCreditController@train');
-
-    Route::post('daily/credit/report', 'DailyCreditController@report');
-
-    Route::post('daily/credit/save', 'DailyCreditController@save');
-
-# Invoice
-    Route::any('invoice/list', 'InvoiceController@index');
-
-    Route::any('invoice/add', 'InvoiceController@add');
-
-    Route::get('invoice/sendMail/{inv_id}', 'InvoiceController@sendMail');
-
-    Route::post('invoice/save', 'InvoiceController@save');
-
-# Daily Sale Clear Credit
-    Route::any('clear/list', 'DailyClearController@index');
-
-    Route::any('clear/cash', 'DailyClearController@cash');
-
-    Route::any('clear/check', 'DailyClearController@check');
-
-    Route::post('clear/save', 'DailyClearController@save');
+    Route::post('order/save', 'OrderController@save');
 
 # Administrator
     Route::get('admin/agent', 'AdminController@agent');

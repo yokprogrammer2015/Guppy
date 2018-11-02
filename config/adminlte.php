@@ -108,121 +108,19 @@ return [
     */
 
     'menu' => [
-        'BOOKING',
+        'ORDERS',
         [
-            'text' => 'Dash Board',
-            'url' => 'dashboard',
-            'icon' => 'dashboard',
-        ],
-        [
-            'text' => 'List Booking',
-            'url' => 'booking/list',
+            'text' => 'List Order',
+            'url' => 'order/list',
             'icon' => 'list-ol',
         ],
         [
-            'text' => 'Add Booking',
+            'text' => 'Add Order',
             'icon' => 'plus-square',
             'submenu' => [
                 [
-                    'text' => 'Boat',
-                    'url' => 'booking/boat',
-                    'icon_color' => 'aqua',
-                ],
-                [
-                    'text' => 'Bus',
-                    'url' => 'booking/bus',
-                    'icon_color' => 'aqua',
-                ],
-                [
-                    'text' => 'Joint Ticket',
-                    'url' => 'booking/jointTicket',
-                    'icon_color' => 'aqua',
-                ],
-            ],
-        ],
-        'DAILY SALE CASH',
-        [
-            'text' => 'List Daily Sale Cash',
-            'url' => 'daily/cash/list',
-            'icon' => 'list-ol',
-        ],
-        [
-            'text' => 'Add Daily Sale Cash',
-            'icon' => 'plus-square',
-            'submenu' => [
-                [
-                    'text' => 'Boat',
-                    'url' => 'daily/cash/boat',
-                    'icon_color' => 'aqua',
-                ],
-                [
-                    'text' => 'Bus',
-                    'url' => 'daily/cash/bus',
-                    'icon_color' => 'aqua',
-                ],
-                [
-                    'text' => 'Joint Ticket',
-                    'url' => 'daily/cash/jointTicket',
-                    'icon_color' => 'aqua',
-                ],
-            ],
-        ],
-        'DAILY SALE CREDIT',
-        [
-            'text' => 'List Daily Sale Credit',
-            'url' => 'daily/credit/list',
-            'icon' => 'list-ol',
-        ],
-        [
-            'text' => 'Add Daily Sale Credit',
-            'icon' => 'plus-square',
-            'submenu' => [
-                [
-                    'text' => 'Boat',
-                    'url' => 'daily/credit/boat',
-                    'icon_color' => 'aqua',
-                ],
-                [
-                    'text' => 'Bus',
-                    'url' => 'daily/credit/bus',
-                    'icon_color' => 'aqua',
-                ],
-                [
-                    'text' => 'Joint Ticket',
-                    'url' => 'daily/credit/jointTicket',
-                    'icon_color' => 'aqua',
-                ],
-            ],
-        ],
-        'INVOICE',
-        [
-            'text' => 'List Invoice',
-            'url' => 'invoice/list',
-            'icon' => 'list-ol',
-        ],
-        [
-            'text' => 'Add Invoice',
-            'url' => 'invoice/add',
-            'icon' => 'plus-square',
-        ],
-        'DAILY SALE CLEAR CREDIT',
-        [
-            'text' => 'List D/S Clear Credit',
-            'url' => 'clear/list',
-            'icon' => 'list-ol',
-        ],
-        [
-            'text' => 'Add D/S Clear Credit',
-            'icon' => 'plus-square',
-            'submenu' => [
-                [
-                    'text' => 'Cash',
-                    'url' => 'clear/cash',
-                    'icon_color' => 'aqua',
-                ],
-                [
-                    'text' => 'Check',
-                    'url' => 'clear/check',
+                    'text' => 'Guppy',
+                    'url' => 'order/guppy',
                     'icon_color' => 'aqua',
                 ],
             ],
@@ -233,18 +131,13 @@ return [
             'icon' => 'users',
             'submenu' => [
                 [
-                    'text' => 'Agent',
-                    'url' => 'admin/agent',
-                    'icon' => 'users',
-                ],
-                [
                     'text' => 'Member',
                     'url' => 'admin/member',
                     'icon' => 'user-plus',
                 ],
                 [
                     'text' => 'Logs',
-                    'url' => 'log-viewer',
+                    'url' => 'logs',
                     'icon' => 'search-plus',
                 ],
             ],
@@ -254,31 +147,6 @@ return [
             'text' => 'Manage Config',
             'icon' => 'gears',
             'submenu' => [
-                [
-                    'text' => 'Branch',
-                    'url' => 'config/branch',
-                    'icon' => 'gears',
-                ],
-                [
-                    'text' => 'Route',
-                    'url' => 'config/route',
-                    'icon' => 'gears',
-                ],
-                [
-                    'text' => 'Destination',
-                    'url' => 'config/destination',
-                    'icon' => 'gears',
-                ],
-                [
-                    'text' => 'Best Seller',
-                    'url' => 'config/bestSeller',
-                    'icon' => 'gears',
-                ],
-                [
-                    'text' => 'Time',
-                    'url' => 'config/time',
-                    'icon' => 'gears',
-                ],
                 [
                     'text' => 'Bank',
                     'url' => 'config/bank',

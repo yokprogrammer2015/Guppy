@@ -59,7 +59,6 @@
                             <th>No.</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Branch</th>
                             <th>Type</th>
                             <th>Status</th>
                             <th>Edit</th>
@@ -71,7 +70,6 @@
                                 <td>{{ $k+1 }}</td>
                                 <td>{{ $row->mb_name }}</td>
                                 <td>{{ $row->mb_email }}</td>
-                                <td>{{ $row->branch->con_name }}</td>
                                 <td>{{ $row->memberType->con_name }}</td>
                                 <td>
                                     {!! html_entity_decode($row->status($row->mb_status)) !!}

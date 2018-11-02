@@ -27,7 +27,6 @@ class MemberRequest extends FormRequest
             'email' => 'required|email',
             'password' => 'required|min:6',
             'name' => 'required',
-            'branch_id' => 'required',
             'type_id' => 'required',
         ];
     }
@@ -35,7 +34,6 @@ class MemberRequest extends FormRequest
     public function messages()
     {
         return [
-            'branch_id.required' => 'The branch field is required.',
             'type_id.required' => 'The type field is required.',
         ];
     }

@@ -161,7 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
     ],
 
     /*

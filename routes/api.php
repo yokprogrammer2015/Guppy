@@ -17,6 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+# Amphure
+Route::get('amphure/{id}', 'AjaxController@getAmphure');
+
+# District
+Route::get('district/{id}', 'AjaxController@getDistrict');
+
 # Service
 Route::get('dailySale', 'ServiceController@dailySale');
 

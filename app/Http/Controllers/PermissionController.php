@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class PermissionController extends Controller
 {
@@ -32,16 +31,14 @@ class PermissionController extends Controller
                         $request->session()->put('branch_id', $val->branch_id);
                         $request->session()->put('route_id', $val->branch->rou_id);
 
-                        return redirect('dashboard');
+                        return redirect('order/list');
                     } else {
                         return redirect('login');
                     }
                 }
             }
-            Log::info('Login : ' . serialize($request->all()));
             return redirect('login');
         } catch (\Exception $exception) {
-            Log::error('Login : ', $exception);
             return $exception->getMessage();
         }
     }
