@@ -13,14 +13,21 @@
                 <div class="box box-primary">
                     <div class="box-header with-border bg-info">
                         <h3 class="box-title"></h3>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
                     <form role="form" action="{{ url('order/save') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <input type="hidden" name="order_id" id="order_id" value="">
-                        <input type="hidden" name="cat_id" id="cat_id" value="1">
-                        <input type="hidden" name="cat_name" id="cat_name" value="boat">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>หัวข้อสินค้า</label>
@@ -35,14 +42,12 @@
                             <div class="form-group">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="type" id="type" value="1" checked=""
-                                               onclick="getTravel(1)">
+                                        <input type="radio" name="type" id="type" value="1" checked="">
                                         <strong>กำหนดวัน</strong>
                                     </label>
                                     &nbsp;
                                     <label>
-                                        <input type="radio" name="type" id="type" value="2"
-                                               onclick="getTravel(2)">
+                                        <input type="radio" name="type" id="type" value="2">
                                         <strong>ไม่กำหนดวัน</strong>
                                     </label>
                                 </div>
@@ -54,8 +59,7 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     <input type="text" class="form-control" name="expiredDate" id="expiredDate"
-                                           value="" placeholder="mm/dd/yyyy" autocomplete="off"
-                                           required>
+                                           value="{{ $expiredDate }}" placeholder="mm/dd/yyyy" autocomplete="off">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -82,14 +86,14 @@
                                         <label>รูปภาพ 2</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
-                                            <input type="file" class="form-control" name="pic2" id="pic2" required>
+                                            <input type="file" class="form-control" name="pic2" id="pic2">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <label>รูปภาพ 3</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
-                                            <input type="file" class="form-control" name="pic3" id="pic3" required>
+                                            <input type="file" class="form-control" name="pic3" id="pic3">
                                         </div>
                                     </div>
                                 </div>

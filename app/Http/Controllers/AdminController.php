@@ -101,7 +101,7 @@ class AdminController extends Controller
             Log::info('Invoice Save : ' . serialize($request->all()));
             return redirect('admin/member')->with('message', 'Successful!');
         } catch (\Exception $exception) {
-            Log::error('Invoice Save : ', $exception);
+            Log::info('Invoice Save : ', $exception);
             return $exception->getMessage();
         }
     }

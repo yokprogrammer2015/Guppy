@@ -28,8 +28,6 @@ class PermissionController extends Controller
                         $request->session()->put('member_name', $val->mb_name);
                         $request->session()->put('mb_email', $val->mb_email);
                         $request->session()->put('mb_type', $val->type_id);
-                        $request->session()->put('branch_id', $val->branch_id);
-                        $request->session()->put('route_id', $val->branch->rou_id);
 
                         return redirect('order/list');
                     } else {

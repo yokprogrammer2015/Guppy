@@ -12,6 +12,15 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Search</h3>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -54,64 +63,36 @@
                            aria-describedby="example2_info">
                         <thead>
                         <tr role="row" class="bg-primary">
-                            <th>No.</th>
-                            <th>Travel Date</th>
-                            <th>Agent</th>
-                            <th>Ticket No</th>
-                            <th>Voucher No</th>
-                            <th>Dep</th>
-                            <th>Arr</th>
-                            <th>Adult</th>
-                            <th>Child</th>
-                            <th>Sell Adult</th>
-                            <th>Sell Child</th>
-                            <th>Net Adult</th>
-                            <th>Net Child</th>
-                            <th>Sell Total</th>
-                            <th>Net Total</th>
-                            <th>Profit</th>
-                            <th>PDF</th>
+                            <th>ลำดับ</th>
+                            <th>รูป</th>
+                            <th>สินค้า</th>
+                            <th>ราคา</th>
+                            <th>วันหมดอายุ</th>
                             <th>Cancel</th>
                             <th>Edit</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="" target="_blank">
-                                    <button type="button" class="btn btn-sm btn-default">
-                                        <i class="fa fa-file-pdf-o"></i> Ticket
-                                    </button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href=""
-                                   onclick="return confirm('Are you sure you want to cancel this item?');">
-                                    <button type="button" class="btn btn-sm btn-danger">Cancel</button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="">
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach($order as $k => $row)
+                            <tr role="row">
+                                <td>{{ $k+1 }}</td>
+                                <td>@if($row->pic1)<img src="{{ env('THUMBNAIL_PATH').$row->pic1 }}" alt="">@endif</td>
+                                <td>{{ $row->name }}</td>
+                                <td>{{ $row->price }}</td>
+                                <td>@if($row->type==1){{ $row->expiredDate }}@endif</td>
+                                <td>
+                                    <a href=""
+                                       onclick="return confirm('Are you sure you want to cancel this item?');">
+                                        <button type="button" class="btn btn-sm btn-danger">Cancel</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="">
+                                        <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
