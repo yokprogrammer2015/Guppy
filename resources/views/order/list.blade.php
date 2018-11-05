@@ -24,27 +24,24 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="{{ url('booking/list') }}" method="post">
+                <form role="form" action="{{ url('order/list') }}" method="post">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-2">
-                                    <select class="form-control" name="cat_id" id="cat_id">
-                                        <option value=""> -- Category --</option>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="status" id="status">
+                                        <option value=""> -- เลือกสถานะ --</option>
+                                        <option value="Y" @if($status=='Y'){{ 'selected' }}@endif>เปิดใช้งาน</option>
+                                        <option value="N" @if($status=='N'){{ 'selected' }}@endif>ปิดใช้งาน</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-control" name="ag_id" id="ag_id">
-                                        <option value=""> -- Select --</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" class="form-control" name="ticket_no" id="ticket_no"
-                                           value="" placeholder="Ticket No">
+                                    <input type="text" class="form-control" name="name" id="name"
+                                           value="{{ $name }}" placeholder="สินค้า">
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา
                                     </button>
                                 </div>
                             </div>
@@ -68,26 +65,29 @@
                             <th>สินค้า</th>
                             <th>ราคา</th>
                             <th>วันหมดอายุ</th>
+                            <th>สถานะ</th>
                             <th>Cancel</th>
                             <th>Edit</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($order as $k => $row)
+                            @php $status = $getFunction->getStatusCode($row->status) @endphp
                             <tr role="row">
                                 <td>{{ $k+1 }}</td>
-                                <td>@if($row->pic1)<img src="{{ env('THUMBNAIL_PATH').$row->pic1 }}" alt="">@endif</td>
+                                <td>@if($row->pic1)<img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}" alt="">@endif</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->price }}</td>
                                 <td>@if($row->type==1){{ $row->expiredDate }}@endif</td>
+                                <td>{!! $status !!}</td>
                                 <td>
-                                    <a href=""
+                                    <a href="{{ url('order/remove/'.$row->id) }}"
                                        onclick="return confirm('Are you sure you want to cancel this item?');">
                                         <button type="button" class="btn btn-sm btn-danger">Cancel</button>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="">
+                                    <a href="{{ url('order/guppy/'.$row->id) }}">
                                         <button type="button" class="btn btn-sm btn-primary">Edit</button>
                                     </a>
                                 </td>

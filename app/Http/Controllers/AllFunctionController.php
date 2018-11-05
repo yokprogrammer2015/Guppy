@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Running;
 
 class AllFunctionController extends Controller
 {
@@ -13,39 +12,6 @@ class AllFunctionController extends Controller
     public function __construct()
     {
         $this->order = new Order();
-        $this->running = new Running();
-    }
-
-    public function genComCode()
-    {
-        $ticketNo = substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6)), 0, 6);
-        $order = $this->order->where('com_code', $ticketNo)->count();
-        if ($order != 0) {
-            return $this->genComCode();
-        }
-        return $ticketNo;
-    }
-
-    public function getRunning($branch_id = null, $cat_id = null)
-    {
-        $data = array('ds_book' => '', 'ds_no' => '');
-        if ($branch_id && $cat_id) {
-            $running = $this->running->where('branch_id', $branch_id)->where('cat_id', $cat_id)->orderBy('con_id', 'desc')->first();
-            if ($running->ds_no > 999999) {
-                $data['ds_book'] = ($running->ds_book + 1);
-                $data['ds_no'] = 1;
-            } else {
-                $data['ds_book'] = $running->ds_book;
-                $data['ds_no'] = ($running->ds_no + 1);
-            }
-
-            $this->running->where('branch_id', $branch_id)->where('cat_id', $cat_id)->update([
-                'ds_book' => $data['ds_book'],
-                'ds_no' => $data['ds_no'],
-                'last_update' => now()
-            ]);
-        }
-        return $data;
     }
 
     public function DateFormat($val, $full)
@@ -147,35 +113,14 @@ class AllFunctionController extends Controller
         return $value;
     }
 
-    public function getStatusCode($code = null, $value = null)
+    public function getStatusCode($code = null)
     {
         switch ($code) {
-            case 200000:
-                $data = array('resultCode' => 200000, 'message' => 'successfully');
-                break;
-            case 403000:
-                $data = array('resultCode' => 403000, 'message' => 'Required Validation Parameter');
-                break;
-            case 403001:
-                $data = array('resultCode' => 403001, 'message' => 'Not category in the system');
-                break;
-            case 403002:
-                $data = array('resultCode' => 403002, 'message' => 'Not product in the system');
-                break;
-            case 403003:
-                $data = array('resultCode' => 403003, 'message' => 'Over credit');
-                break;
-            case 403004:
-                $data = array('resultCode' => 403004, 'message' => 'Not Data Value');
-                break;
-            case 403005:
-                $data = array('resultCode' => 403005, 'message' => 'The Allotment not enough');
-                break;
-            case 403007:
-                $data = array('resultCode' => 403007, 'message' => 'Please booking ' . $value . ' hour in advance');
+            case 'Y':
+                $data = '<span class="label bg-green">เปิดใช้งาน</span>';
                 break;
             default:
-                $data = array('resultCode' => 403006, 'message' => 'Page not found');
+                $data = '<span class="label bg-red">ปิดใช้งาน</span>';
         }
 
         return $data;

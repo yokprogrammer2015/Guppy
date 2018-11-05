@@ -10,11 +10,6 @@ class Member extends Model
     const CREATED_AT = 'creation_date';
     const UPDATED_AT = 'last_update';
 
-    public function Branch()
-    {
-        return $this->hasOne('App\Models\Branch', 'con_id', 'branch_id');
-    }
-
     public function MemberType()
     {
         return $this->hasOne('App\Models\MemberType', 'con_id', 'type_id');

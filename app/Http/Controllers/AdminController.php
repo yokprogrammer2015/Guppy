@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AgentRequest;
 use App\Http\Requests\MemberRequest;
-use App\Models\Agent;
 use App\Models\Amphure;
 use App\Models\District;
 use App\Models\Member;
@@ -14,7 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
-    private $agent;
     private $member;
     private $province;
     private $amphure;
@@ -22,7 +19,6 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->agent = new Agent();
         $this->member = new Member();
         $this->province = new Province();
         $this->amphure = new Amphure();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use \Eventviva\ImageResize;
 use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -24,15 +23,40 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $data['title'] = 'List Orders';
-        $data['order'] = $this->order->orderBy('id', 'desc')->get();
+        $data['status'] = $request->input('status');
+        $data['name'] = $request->input('name');
+        $data['getFunction'] = $this->getFunction;
+
+        $order = $this->order->where('mb_id', session('member_id'));
+        if ($data['status']) {
+            $order->where('status', $data['status']);
+        }
+        if ($data['name']) {
+            $order->where('name', $data['name']);
+        }
+        $data['order'] = $order->orderBy('status', 'desc')->orderBy('id', 'desc')->get();
 
         return view('order.list', $data);
     }
 
-    public function guppy()
+    public function guppy($id = 0)
     {
-        $data = array('id' => '', 'expiredDate' => date('m/d/Y'));
+        $data = array('id' => '', 'name' => '', 'type' => 1, 'expiredDate' => date('m/d/Y'), 'price' => '',
+            'pic1_val' => '', 'pic2_val' => '', 'pic3_val' => '', 'remark' => '');
         $data['title'] = 'Add Guppy';
+
+        if ($id) {
+            $order = $this->order->where('id', $id)->first();
+            $data['id'] = $order->id;
+            $data['name'] = $order->name;
+            $data['type'] = $order->type;
+            $data['expiredDate'] = $this->getFunction->showDateFormat($order->expiredDate);
+            $data['price'] = $order->price;
+            $data['pic1_val'] = $order->pic1;
+            $data['pic2_val'] = $order->pic2;
+            $data['pic3_val'] = $order->pic3;
+            $data['remark'] = $order->remark;
+        }
 
         return view('order.guppy', $data);
     }
@@ -54,7 +78,7 @@ class OrderController extends Controller
 
         if (!empty($pic1)) {
             $this->image1 = new ImageResize($pic1);
-            $this->image1->resize(100, 80);
+            $this->image1->resize(150, 100);
             $this->image1->save(env("THUMBNAIL_PATH") . $running . '1.jpg');
             $this->image1->resize(600, 400);
             $this->image1->save(env("IMAGE_PATH") . $running . '1.jpg');
@@ -62,7 +86,7 @@ class OrderController extends Controller
         }
         if (!empty($pic2)) {
             $this->image2 = new ImageResize($pic2);
-            $this->image2->resize(100, 80);
+            $this->image2->resize(150, 100);
             $this->image2->save(env("THUMBNAIL_PATH") . $running . '2.jpg');
             $this->image2->resize(600, 400);
             $this->image2->save(env("IMAGE_PATH") . $running . '2.jpg');
@@ -70,7 +94,7 @@ class OrderController extends Controller
         }
         if (!empty($pic3)) {
             $this->image3 = new ImageResize($pic3);
-            $this->image3->resize(100, 80);
+            $this->image3->resize(150, 100);
             $this->image3->save(env("THUMBNAIL_PATH") . $running . '3.jpg');
             $this->image3->resize(600, 400);
             $this->image3->save(env("IMAGE_PATH") . $running . '3.jpg');
@@ -80,6 +104,7 @@ class OrderController extends Controller
         try {
             if (!$id) { // Insert
                 $this->order->insertGetId([
+                    'mb_id' => session('member_id'),
                     'name' => $name,
                     'type' => $type,
                     'expiredDate' => $expiredDate,
@@ -94,6 +119,7 @@ class OrderController extends Controller
                 ]);
             } else { // Update
                 $this->order->where('id', $id)->update([
+                    'mb_id' => session('member_id'),
                     'name' => $name,
                     'type' => $type,
                     'expiredDate' => $expiredDate,
@@ -107,24 +133,20 @@ class OrderController extends Controller
                     'last_update' => now()
                 ]);
             }
-            //Log::info('Order Save : ' . serialize($request->all()));
             return redirect('order/list')->with('message', 'Successful!');
         } catch (\Exception $exception) {
-            //Log::info('Order Save : ', $exception);
             return $exception->getMessage();
         }
     }
 
-    public function remove($order_id = null)
+    public function remove($id = null)
     {
         try {
-            Log::info('Order Remove : By | ' . session('member_name') . ' | OrderID | ' . $order_id);
-            $this->order->where('order_id', $order_id)->update([
-                'status' => 1
+            $this->order->where('mb_id', session('member_id'))->where('id', $id)->update([
+                'status' => 'N'
             ]);
-            return redirect('booking/list');
+            return redirect('order/list');
         } catch (\Exception $exception) {
-            Log::info('Order Remove : ', $exception);
             return $exception->getMessage();
         }
     }

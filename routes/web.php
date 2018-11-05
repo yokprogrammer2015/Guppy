@@ -27,9 +27,9 @@ Route::group(['middleware' => 'my_auth'], function () {
 # Order
     Route::any('order/list', 'OrderController@index');
 
-    Route::any('order/guppy', 'OrderController@guppy');
+    Route::any('order/guppy/{id?}', 'OrderController@guppy');
 
-    Route::get('order/remove/{order_id}', 'OrderController@remove');
+    Route::get('order/remove/{id}', 'OrderController@remove');
 
     Route::post('order/save', 'OrderController@save');
 

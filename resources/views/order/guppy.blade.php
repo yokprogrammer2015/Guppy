@@ -27,7 +27,7 @@
                     <!-- form start -->
                     <form role="form" action="{{ url('order/save') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <input type="hidden" name="id" id="id" value="">
+                        <input type="hidden" name="id" id="id" value="{{ $id }}">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>หัวข้อสินค้า</label>
@@ -35,19 +35,20 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-bullhorn"></i>
                                     </div>
-                                    <input class="form-control" type="text" name="name" id="name" value=""
+                                    <input class="form-control" type="text" name="name" id="name" value="{{ $name }}"
                                            placeholder="หัวข้อสินค้า">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="type" id="type" value="1" checked="">
+                                        <input type="radio" name="type" id="type" value="1"
+                                               @if($type==1){{ 'checked' }}@endif>
                                         <strong>กำหนดวัน</strong>
                                     </label>
                                     &nbsp;
                                     <label>
-                                        <input type="radio" name="type" id="type" value="2">
+                                        <input type="radio" name="type" id="type" value="2" @if($type==2){{ 'checked' }}@endif>
                                         <strong>ไม่กำหนดวัน</strong>
                                     </label>
                                 </div>
@@ -70,7 +71,7 @@
                                         <i class="fa fa-dollar"></i>
                                     </div>
                                     <input type="number" class="form-control" name="price" id="price"
-                                           value="" placeholder="ราคา">
+                                           value="{{ $price }}" placeholder="ราคา">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -80,6 +81,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
                                             <input type="file" class="form-control" name="pic1" id="pic1" required>
+                                            <input type="hidden" name="pic1_val" id="pic1_val" value="{{ $pic1_val }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -87,6 +89,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
                                             <input type="file" class="form-control" name="pic2" id="pic2">
+                                            <input type="hidden" name="pic2_val" id="pic2_val" value="{{ $pic2_val }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -94,6 +97,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
                                             <input type="file" class="form-control" name="pic3" id="pic3">
+                                            <input type="hidden" name="pic3_val" id="pic3_val" value="{{ $pic3_val }}">
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +105,7 @@
                             <div class="form-group">
                                 <label>รายละเอียด</label>
                                 <textarea class="form-control" name="remark" id="remark" cols="30" rows="3"
-                                          placeholder="รายละเอียด"></textarea>
+                                          placeholder="รายละเอียด">{{ $remark }}</textarea>
                             </div>
                         </div>
                         <!-- /.box-body -->
