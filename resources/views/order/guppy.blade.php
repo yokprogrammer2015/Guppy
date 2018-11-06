@@ -40,15 +40,31 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>สายพันธุ์</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-list"></i>
+                                    </div>
+                                    <select class="form-control" name="cat_id" id="cat_id" required>
+                                        <option value=""> -- เลือกสายพันธุ์ --</option>
+                                        @foreach($category as $row)
+                                            <option value="{{ $row->id }}" @if($row->id==$cat_id){{ 'selected' }}@endif>{{ $row->name.' ('.$row->name_th.')' }}</option>
+                                        @endforeach
+                                        <option value="10">Open (อื่นๆ)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="type" id="type" value="1"
-                                               @if($type==1){{ 'checked' }}@endif>
+                                        @if($type==1){{ 'checked' }}@endif>
                                         <strong>กำหนดวัน</strong>
                                     </label>
                                     &nbsp;
                                     <label>
-                                        <input type="radio" name="type" id="type" value="2" @if($type==2){{ 'checked' }}@endif>
+                                        <input type="radio" name="type" id="type"
+                                               value="2" @if($type==2){{ 'checked' }}@endif>
                                         <strong>ไม่กำหนดวัน</strong>
                                     </label>
                                 </div>
@@ -80,7 +96,7 @@
                                         <label>รูปภาพ 1</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
-                                            <input type="file" class="form-control" name="pic1" id="pic1" required>
+                                            <input type="file" class="form-control" name="pic1" id="pic1">
                                             <input type="hidden" name="pic1_val" id="pic1_val" value="{{ $pic1_val }}">
                                         </div>
                                     </div>

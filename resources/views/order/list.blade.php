@@ -30,6 +30,15 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3">
+                                    <select class="form-control" name="cat_id" id="cat_id">
+                                        <option value=""> -- เลือกสายพันธุ์ --</option>
+                                        @foreach($category as $row)
+                                            <option value="{{ $row->id }}" @if($row->id==$cat_id){{ 'selected' }}@endif>{{ $row->name.' ('.$row->name_th.')' }}</option>
+                                        @endforeach
+                                        <option value="10">Open (อื่นๆ)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
                                     <select class="form-control" name="status" id="status">
                                         <option value=""> -- เลือกสถานะ --</option>
                                         <option value="Y" @if($status=='Y'){{ 'selected' }}@endif>เปิดใช้งาน</option>
@@ -63,10 +72,11 @@
                             <tr role="row" class="bg-primary">
                                 <th width="5%">ลำดับ</th>
                                 <th width="10%">รูป</th>
-                                <th width="25%">สินค้า</th>
-                                <th>ราคา</th>
-                                <th>วันหมดอายุ</th>
-                                <th>สถานะ</th>
+                                <th width="8%">สายพันธุ์</th>
+                                <th>สินค้า</th>
+                                <th width="10%">ราคา</th>
+                                <th width="10%">วันหมดอายุ</th>
+                                <th width="10%">สถานะ</th>
                                 <th width="8%">ปิดการขาย</th>
                                 <th width="5%">แก้ไข</th>
                             </tr>
@@ -81,6 +91,7 @@
                                             <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}" class="img-thumbnail">
                                         @endif
                                     </td>
+                                    <td>{{ $row->category->name }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->price }}</td>
                                     <td>@if($row->type==1){{ $row->expiredDate }}@endif</td>

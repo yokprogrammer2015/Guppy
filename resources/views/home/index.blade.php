@@ -23,6 +23,10 @@
                                 <div class="col-md-3">
                                     <select class="form-control" name="cat_id" id="cat_id">
                                         <option value=""> -- เลือกสายพันธุ์ --</option>
+                                        @foreach($category as $row)
+                                            <option value="{{ $row->id }}" @if($row->id==$cat_id){{ 'selected' }}@endif>{{ $row->name.' ('.$row->name_th.')' }}</option>
+                                        @endforeach
+                                        <option value="10">Open (อื่นๆ)</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -52,6 +56,7 @@
                             <tr role="row" class="bg-primary">
                                 <th width="5%">ลำดับ</th>
                                 <th width="10%">รูป</th>
+                                <th width="8%">สายพันธุ์</th>
                                 <th width="15%">สินค้า</th>
                                 <th>รายละเอียด</th>
                                 <th width="10%">ราคา / 1 ชุด</th>
@@ -68,6 +73,7 @@
                                             <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}" class="img-thumbnail">
                                         @endif
                                     </td>
+                                    <td>{{ $row->category->name }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->remark }}</td>
                                     <td>{{ $row->price }}</td>
@@ -79,7 +85,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-primary">สั่งซื้อ</button>
+                                        <button type="button" class="btn btn-sm btn-success">สั่งซื้อ</button>
                                     </td>
                                 </tr>
                             @endforeach

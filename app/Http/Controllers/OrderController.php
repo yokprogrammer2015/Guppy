@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use \Eventviva\ImageResize;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     private $order;
+    private $category;
     private $getFunction;
     protected $image1 = '';
     protected $image2 = '';
@@ -17,6 +19,7 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->order = new Order();
+        $this->category = new Category();
         $this->getFunction = new AllFunctionController();
     }
 
@@ -24,10 +27,15 @@ class OrderController extends Controller
     {
         $data['title'] = 'รายการสินค้า';
         $data['status'] = $request->input('status');
+        $data['cat_id'] = $request->input('cat_id');
         $data['name'] = $request->input('name');
         $data['getFunction'] = $this->getFunction;
+        $data['category'] = $this->category->whereNotIn('id', [10])->orderBy('name', 'asc')->get();
 
         $order = $this->order->where('mb_id', session('member_id'));
+        if ($data['cat_id']) {
+            $order->where('cat_id', $data['cat_id']);
+        }
         if ($data['status']) {
             $order->where('status', $data['status']);
         }
@@ -41,13 +49,15 @@ class OrderController extends Controller
 
     public function guppy($id = 0)
     {
-        $data = array('id' => '', 'name' => '', 'type' => 1, 'expiredDate' => date('m/d/Y'), 'price' => '',
+        $data = array('id' => '', 'cat_id' => '', 'name' => '', 'type' => 1, 'expiredDate' => date('m/d/Y'), 'price' => '',
             'pic1_val' => '', 'pic2_val' => '', 'pic3_val' => '', 'remark' => '');
         $data['title'] = 'เพิ่ม สินค้า';
+        $data['category'] = $this->category->whereNotIn('id', [10])->orderBy('name', 'asc')->get();
 
         if ($id) {
             $order = $this->order->where('id', $id)->first();
             $data['id'] = $order->id;
+            $data['cat_id'] = $order->cat_id;
             $data['name'] = $order->name;
             $data['type'] = $order->type;
             $data['expiredDate'] = $this->getFunction->showDateFormat($order->expiredDate);
@@ -64,17 +74,31 @@ class OrderController extends Controller
     public function save(Request $request)
     {
         $id = $request->input('id');
+        $cat_id = $request->input('cat_id');
         $name = $request->input('name');
         $type = $request->input('type');
         $price = $request->input('price');
         $remark = $request->input('remark');
         $pic1 = $request->file('pic1');
+        $pic1_val = $request->input('pic1_val');
         $pic2 = $request->file('pic2');
+        $pic1_va2 = $request->input('pic1_va2');
         $pic3 = $request->file('pic3');
+        $pic1_va3 = $request->input('pic1_va3');
         $running = $this->order->genRunning();
 
         if ($request->input('expiredDate')) $expiredDate = $this->getFunction->convertDateFormat($request->input('expiredDate'));
         else $expiredDate = $request->input('expiredDate');
+
+        if ($pic1_val) {
+            $this->image1 = $pic1_val;
+        }
+        if ($pic1_va2) {
+            $this->image2 = $pic1_va2;
+        }
+        if ($pic1_va3) {
+            $this->image3 = $pic1_va3;
+        }
 
         if (!empty($pic1)) {
             $this->image1 = new ImageResize($pic1);
@@ -104,6 +128,7 @@ class OrderController extends Controller
         try {
             if (!$id) { // Insert
                 $this->order->insertGetId([
+                    'cat_id' => $cat_id,
                     'mb_id' => session('member_id'),
                     'name' => $name,
                     'type' => $type,
@@ -119,6 +144,7 @@ class OrderController extends Controller
                 ]);
             } else { // Update
                 $this->order->where('id', $id)->update([
+                    'cat_id' => $cat_id,
                     'mb_id' => session('member_id'),
                     'name' => $name,
                     'type' => $type,

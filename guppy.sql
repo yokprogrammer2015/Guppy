@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database
--- Generation Time: Nov 05, 2018 at 07:43 AM
+-- Generation Time: Nov 06, 2018 at 08:36 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -1136,6 +1136,34 @@ INSERT INTO `branch` (`con_id`, `rou_id`, `con_name`, `phone`, `mobile`, `fax`, 
 (13, 8, 'Krabi', '075-621-209', '', '', '2018-08-13 08:45:20', '2018-08-16 08:28:43'),
 (14, 11, 'Phi Phi', '', '', '', '2018-08-13 08:45:48', '2018-08-13 08:45:48'),
 (15, 1, 'TEST', '838989572', '838989572', '838989572', '2018-09-24 02:43:28', '2018-09-24 02:43:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(3) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `name_th` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `name_th`) VALUES
+(1, 'Mosaic', 'โมเสค'),
+(2, 'Tuxedo / Half black', 'ทักซิโด้ / ฮาฟแบ็ค'),
+(3, 'Grass', 'กราซ'),
+(4, 'Cobra', 'คอบบร้า'),
+(5, 'Snake skin', 'สเน็คสกิน'),
+(6, 'Solid', 'โซลิด'),
+(7, 'Albino', 'อัลบิโน่'),
+(8, 'Ribbon', 'ริบบอน'),
+(9, 'Swallow', 'สวอลโล'),
+(10, 'Open', 'อื่นๆ');
 
 -- --------------------------------------------------------
 
@@ -10094,6 +10122,7 @@ INSERT INTO `member_type` (`con_id`, `con_name`) VALUES
 
 CREATE TABLE `order` (
   `id` int(11) NOT NULL,
+  `cat_id` int(3) NOT NULL,
   `mb_id` int(10) NOT NULL,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `type` int(1) NOT NULL,
@@ -10112,9 +10141,9 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`id`, `mb_id`, `name`, `type`, `expiredDate`, `price`, `remark`, `status`, `pic1`, `pic2`, `pic3`, `creation_date`, `last_update`) VALUES
-(1, 1, 'Blue Grass', 1, '2018-11-05', 300, 'ชื่อ : Blue gress', 'N', '181100011.jpg', '', '', '2018-11-05 07:36:41', '2018-11-05 07:41:15'),
-(2, 1, 'Full Red', 2, '2018-11-05', 300, 'Full Red Black Eye', 'Y', '181100021.jpg', '', '', '2018-11-05 07:40:08', '2018-11-05 07:40:08');
+INSERT INTO `order` (`id`, `cat_id`, `mb_id`, `name`, `type`, `expiredDate`, `price`, `remark`, `status`, `pic1`, `pic2`, `pic3`, `creation_date`, `last_update`) VALUES
+(2, 7, 1, 'Full Red', 2, '2018-11-05', 300, 'Full Red Black Eye', 'Y', '181100021.jpg', '', '', '2018-11-06 08:05:41', '2018-11-06 08:05:41'),
+(3, 3, 1, 'Blue Grass', 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'Y', '181100031.jpg', '', '', '2018-11-06 08:02:39', '2018-11-06 08:02:39');
 
 -- --------------------------------------------------------
 
@@ -10244,6 +10273,12 @@ ALTER TABLE `branch`
   ADD KEY `rou_id` (`rou_id`);
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `districts`
 --
 ALTER TABLE `districts`
@@ -10273,7 +10308,8 @@ ALTER TABLE `member_type`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `mb_id` (`mb_id`);
+  ADD KEY `mb_id` (`mb_id`),
+  ADD KEY `cat_id` (`cat_id`);
 
 --
 -- Indexes for table `provinces`
@@ -10310,6 +10346,12 @@ ALTER TABLE `branch`
   MODIFY `con_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `geographies`
 --
 ALTER TABLE `geographies`
@@ -10331,7 +10373,7 @@ ALTER TABLE `member_type`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `provinces`

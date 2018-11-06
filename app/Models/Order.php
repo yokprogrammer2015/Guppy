@@ -17,6 +17,11 @@ class Order extends Model
         return $this->hasOne('App\Models\Member', 'mb_id', 'mb_id');
     }
 
+    public function Category()
+    {
+        return $this->hasOne('App\Models\Category', 'id', 'cat_id');
+    }
+
     public function genRunning()
     { // ex 18110001
         $order = DB::table('order')->select('id')->orderBy('id', 'desc')->first();
