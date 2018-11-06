@@ -12,28 +12,17 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">ค้นหา</h3>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="{{ url('order/list') }}" method="post">
+                <form role="form" action="{{ url('guppy/list') }}" method="post">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <select class="form-control" name="status" id="status">
-                                        <option value=""> -- เลือกสถานะ --</option>
-                                        <option value="Y" @if($status=='Y'){{ 'selected' }}@endif>เปิดใช้งาน</option>
-                                        <option value="N" @if($status=='N'){{ 'selected' }}@endif>ปิดใช้งาน</option>
+                                    <select class="form-control" name="cat_id" id="cat_id">
+                                        <option value=""> -- เลือกสายพันธุ์ --</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -63,17 +52,15 @@
                             <tr role="row" class="bg-primary">
                                 <th width="5%">ลำดับ</th>
                                 <th width="10%">รูป</th>
-                                <th width="25%">สินค้า</th>
-                                <th>ราคา</th>
-                                <th>วันหมดอายุ</th>
-                                <th>สถานะ</th>
-                                <th width="8%">ปิดการขาย</th>
-                                <th width="5%">แก้ไข</th>
+                                <th width="15%">สินค้า</th>
+                                <th>รายละเอียด</th>
+                                <th width="10%">ราคา / 1 ชุด</th>
+                                <th width="5%">จำนวน</th>
+                                <th width="5%">สั่งซื้อ</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($order as $k => $row)
-                                @php $status = $getFunction->getStatusCode($row->status) @endphp
                                 <tr role="row">
                                     <td>{{ $k+1 }}</td>
                                     <td>
@@ -82,19 +69,17 @@
                                         @endif
                                     </td>
                                     <td>{{ $row->name }}</td>
+                                    <td>{{ $row->remark }}</td>
                                     <td>{{ $row->price }}</td>
-                                    <td>@if($row->type==1){{ $row->expiredDate }}@endif</td>
-                                    <td>{!! $status !!}</td>
                                     <td>
-                                        <a href="{{ url('order/remove/'.$row->id) }}"
-                                           onclick="return confirm('Are you sure you want to cancel this item?');">
-                                            <button type="button" class="btn btn-sm btn-danger">ปิดการขาย</button>
-                                        </a>
+                                        <select name="" id="">
+                                            @for($i=1; $i<=10; $i++)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
                                     </td>
                                     <td>
-                                        <a href="{{ url('order/guppy/'.$row->id) }}">
-                                            <button type="button" class="btn btn-sm btn-primary">แก้ไข</button>
-                                        </a>
+                                        <button type="button" class="btn btn-sm btn-primary">สั่งซื้อ</button>
                                     </td>
                                 </tr>
                             @endforeach

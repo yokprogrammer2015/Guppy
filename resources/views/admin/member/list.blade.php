@@ -53,36 +53,38 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover" role="grid">
-                        <thead>
-                        <tr role="row" class="bg-primary">
-                            <th>No.</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Edit</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($member as $k=>$row)
-                            <tr role="row">
-                                <td>{{ $k+1 }}</td>
-                                <td>{{ $row->mb_name }}</td>
-                                <td>{{ $row->mb_email }}</td>
-                                <td>{{ $row->memberType->con_name }}</td>
-                                <td>
-                                    {!! html_entity_decode($row->status($row->mb_status)) !!}
-                                </td>
-                                <td>
-                                    <a href="{{ url('admin/add/member/'.$row->mb_id) }}">
-                                        <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    </a>
-                                </td>
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-bordered table-hover" role="grid">
+                            <thead>
+                            <tr role="row" class="bg-primary">
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Edit</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($member as $k=>$row)
+                                <tr role="row">
+                                    <td>{{ $k+1 }}</td>
+                                    <td>{{ $row->mb_name }}</td>
+                                    <td>{{ $row->mb_email }}</td>
+                                    <td>{{ $row->memberType->con_name }}</td>
+                                    <td>
+                                        {!! html_entity_decode($row->status($row->mb_status)) !!}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('admin/add/member/'.$row->mb_id) }}">
+                                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

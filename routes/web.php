@@ -13,17 +13,21 @@
 
 Auth::routes();
 
-Route::get('/', 'PermissionController@checkLogin');
+Route::get('/', 'HomeController@index');
+
+# Home
+Route::any('guppy/list', 'HomeController@index');
+
+Route::get('admin', 'PermissionController@checkLogin');
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 # Permission
 Route::post('login', 'PermissionController@checkLogin');
 
-Route::get('logout', 'PermissionController@logout');
+Route::any('logout', 'PermissionController@logout');
 
-Route::group(['middleware' => 'my_auth'], function () {
-
+Route::group(['middleware' => 'my_auth'], function () { // Back End
 # Order
     Route::any('order/list', 'OrderController@index');
 

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'VoucherADV',
+    'title' => 'Guppy Thailand',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Voucher</b>ADV',
+    'logo' => '<b>Guppy</b>Thailand',
 
-    'logo_mini' => '<b>V</b>ADV',
+    'logo_mini' => '<b>Guppy</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,26 +108,23 @@ return [
     */
 
     'menu' => [
-        'ORDERS',
         [
-            'text' => 'List Order',
+            'text' => 'รายการสินค้า',
+            'url' => 'guppy/list',
+            'icon' => 'list-ol',
+        ],
+        [
+            'text' => 'รายการ',
             'url' => 'order/list',
             'icon' => 'list-ol',
         ],
         [
-            'text' => 'Add Order',
+            'text' => 'เพิ่มรายการ',
+            'url' => 'order/guppy',
             'icon' => 'plus-square',
-            'submenu' => [
-                [
-                    'text' => 'Guppy',
-                    'url' => 'order/guppy',
-                    'icon_color' => 'aqua',
-                ],
-            ],
         ],
-        'ADMINISTRATOR',
         [
-            'text' => 'Manage Admin',
+            'text' => 'จัดการผู้ใช้',
             'icon' => 'users',
             'submenu' => [
                 [
@@ -142,9 +139,8 @@ return [
                 ],
             ],
         ],
-        'CONFIGURATION',
         [
-            'text' => 'Manage Config',
+            'text' => 'ตั้งค่า',
             'icon' => 'gears',
             'submenu' => [
                 [

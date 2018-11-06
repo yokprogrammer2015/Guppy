@@ -22,7 +22,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $data['title'] = 'List Orders';
+        $data['title'] = 'รายการสินค้า';
         $data['status'] = $request->input('status');
         $data['name'] = $request->input('name');
         $data['getFunction'] = $this->getFunction;
@@ -43,7 +43,7 @@ class OrderController extends Controller
     {
         $data = array('id' => '', 'name' => '', 'type' => 1, 'expiredDate' => date('m/d/Y'), 'price' => '',
             'pic1_val' => '', 'pic2_val' => '', 'pic3_val' => '', 'remark' => '');
-        $data['title'] = 'Add Guppy';
+        $data['title'] = 'เพิ่ม สินค้า';
 
         if ($id) {
             $order = $this->order->where('id', $id)->first();

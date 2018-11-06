@@ -19,11 +19,20 @@ class MenuFilter implements FilterInterface
     private function can($px)
     {
         $permissions = session('mb_type');
-
-        if ($permissions == 2 && ($px == 'Manage Admin' || $px == 'Manage Config')) {
-            return false;
+        if ($permissions) {
+            if ($permissions == 2 && ($px == 'รายการสินค้า' || $px == 'จัดการผู้ใช้' || $px == 'ตั้งค่า')) {
+                return false;
+            } else {
+                if ($px == 'รายการสินค้า') {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            if ($px == 'รายการ' || $px == 'เพิ่มรายการ' || $px == 'จัดการผู้ใช้' || $px == 'ตั้งค่า') {
+                return false;
+            }
+            return true;
         }
-
-        return true;
     }
 }

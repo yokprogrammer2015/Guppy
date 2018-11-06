@@ -56,37 +56,39 @@
                     <h3 class="box-title">{{ $description }}</h3>
                 </div>
                 <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover" role="grid">
-                        <thead>
-                        <tr role="row" class="bg-primary">
-                            <th>No.</th>
-                            <th>Bank</th>
-                            <th>Code</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($bank as $k=>$row)
-                            <tr role="row">
-                                <td width="5%">{{ $k+1 }}</td>
-                                <td>{{ $row->con_name }}</td>
-                                <td>{{ $row->con_code }}</td>
-                                <td width="5%">
-                                    <a href="{{ url('config/add/bank/'.$row->con_id) }}">
-                                        <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    </a>
-                                </td>
-                                <td width="5%">
-                                    <a href="{{ url('config/remove/bank/'.$row->con_id) }}"
-                                       onclick="return confirm('Are you sure you want to delete this item?');">
-                                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                                    </a>
-                                </td>
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-bordered table-hover" role="grid">
+                            <thead>
+                            <tr role="row" class="bg-primary">
+                                <th>No.</th>
+                                <th>Bank</th>
+                                <th>Code</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($bank as $k=>$row)
+                                <tr role="row">
+                                    <td width="5%">{{ $k+1 }}</td>
+                                    <td>{{ $row->con_name }}</td>
+                                    <td>{{ $row->con_code }}</td>
+                                    <td width="5%">
+                                        <a href="{{ url('config/add/bank/'.$row->con_id) }}">
+                                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                        </a>
+                                    </td>
+                                    <td width="5%">
+                                        <a href="{{ url('config/remove/bank/'.$row->con_id) }}"
+                                           onclick="return confirm('Are you sure you want to delete this item?');">
+                                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
