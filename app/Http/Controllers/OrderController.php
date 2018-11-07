@@ -49,8 +49,8 @@ class OrderController extends Controller
 
     public function guppy($id = 0)
     {
-        $data = array('id' => '', 'cat_id' => '', 'name' => '', 'type' => 1, 'expiredDate' => date('m/d/Y'), 'price' => '',
-            'pic1_val' => '', 'pic2_val' => '', 'pic3_val' => '', 'remark' => '');
+        $data = array('id' => '', 'cat_id' => '', 'name' => '', 'qty' => 1, 'numberSet' => 1, 'type' => 1,
+            'expiredDate' => date('m/d/Y'), 'price' => '', 'pic1_val' => '', 'pic2_val' => '', 'pic3_val' => '', 'remark' => '', 'vdo' => '');
         $data['title'] = 'เพิ่ม สินค้า';
         $data['category'] = $this->category->whereNotIn('id', [10])->orderBy('name', 'asc')->get();
 
@@ -59,6 +59,8 @@ class OrderController extends Controller
             $data['id'] = $order->id;
             $data['cat_id'] = $order->cat_id;
             $data['name'] = $order->name;
+            $data['qty'] = $order->qty;
+            $data['numberSet'] = $order->numberSet;
             $data['type'] = $order->type;
             $data['expiredDate'] = $this->getFunction->showDateFormat($order->expiredDate);
             $data['price'] = $order->price;
@@ -66,6 +68,7 @@ class OrderController extends Controller
             $data['pic2_val'] = $order->pic2;
             $data['pic3_val'] = $order->pic3;
             $data['remark'] = $order->remark;
+            $data['vdo'] = $order->vdo;
         }
 
         return view('order.guppy', $data);
@@ -76,19 +79,23 @@ class OrderController extends Controller
         $id = $request->input('id');
         $cat_id = $request->input('cat_id');
         $name = $request->input('name');
-        $type = $request->input('type');
+        $qty = $request->input('qty');
+        $numberSet = $request->input('numberSet');
         $price = $request->input('price');
         $remark = $request->input('remark');
+        $vdo = $request->input('vdo');
         $pic1 = $request->file('pic1');
         $pic1_val = $request->input('pic1_val');
         $pic2 = $request->file('pic2');
         $pic1_va2 = $request->input('pic1_va2');
         $pic3 = $request->file('pic3');
         $pic1_va3 = $request->input('pic1_va3');
+        $today = date('Y-m-d');
         $running = $this->order->genRunning();
 
+        if ($request->input('type')) $type = $request->input('type'); else $type = 2;
         if ($request->input('expiredDate')) $expiredDate = $this->getFunction->convertDateFormat($request->input('expiredDate'));
-        else $expiredDate = $request->input('expiredDate');
+        else $expiredDate = $today;
 
         if ($pic1_val) {
             $this->image1 = $pic1_val;
@@ -131,10 +138,13 @@ class OrderController extends Controller
                     'cat_id' => $cat_id,
                     'mb_id' => session('member_id'),
                     'name' => $name,
+                    'qty' => $qty,
+                    'numberSet' => $numberSet,
                     'type' => $type,
                     'expiredDate' => $expiredDate,
                     'price' => $price,
                     'remark' => $remark,
+                    'vdo' => $vdo,
                     'status' => 'Y',
                     'pic1' => $this->image1,
                     'pic2' => $this->image2,
@@ -147,10 +157,13 @@ class OrderController extends Controller
                     'cat_id' => $cat_id,
                     'mb_id' => session('member_id'),
                     'name' => $name,
+                    'qty' => $qty,
+                    'numberSet' => $numberSet,
                     'type' => $type,
                     'expiredDate' => $expiredDate,
                     'price' => $price,
                     'remark' => $remark,
+                    'vdo' => $vdo,
                     'status' => 'Y',
                     'pic1' => $this->image1,
                     'pic2' => $this->image2,

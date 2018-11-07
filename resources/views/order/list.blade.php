@@ -74,10 +74,11 @@
                                 <th width="10%">รูป</th>
                                 <th width="8%">สายพันธุ์</th>
                                 <th>สินค้า</th>
-                                <th width="10%">ราคา</th>
-                                <th width="10%">วันหมดอายุ</th>
-                                <th width="10%">สถานะ</th>
-                                <th width="8%">ปิดการขาย</th>
+                                <th width="10%">จำนวนปลา / ตัว</th>
+                                <th width="8%">คงเหลือ / ชุด</th>
+                                <th width="7%">ราคา</th>
+                                <th width="7%">สถานะ</th>
+                                <th width="7%">ปิดการขาย</th>
                                 <th width="5%">แก้ไข</th>
                             </tr>
                             </thead>
@@ -93,8 +94,9 @@
                                     </td>
                                     <td>{{ $row->category->name }}</td>
                                     <td>{{ $row->name }}</td>
+                                    <td>{{ $row->qty }}</td>
+                                    <td>{{ $row->numberSet }}</td>
                                     <td>{{ $row->price }}</td>
-                                    <td>@if($row->type==1){{ $row->expiredDate }}@endif</td>
                                     <td>{!! $status !!}</td>
                                     <td>
                                         <a href="{{ url('order/remove/'.$row->id) }}"

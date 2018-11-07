@@ -30,20 +30,10 @@
                         <input type="hidden" name="id" id="id" value="{{ $id }}">
                         <div class="box-body">
                             <div class="form-group">
-                                <label>หัวข้อสินค้า</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-bullhorn"></i>
-                                    </div>
-                                    <input class="form-control" type="text" name="name" id="name" value="{{ $name }}"
-                                           placeholder="หัวข้อสินค้า">
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label>สายพันธุ์</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
-                                        <i class="fa fa-list"></i>
+                                        <i class="fa fa-chevron-right"></i>
                                     </div>
                                     <select class="form-control" name="cat_id" id="cat_id" required>
                                         <option value=""> -- เลือกสายพันธุ์ --</option>
@@ -55,30 +45,34 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="type" id="type" value="1"
-                                        @if($type==1){{ 'checked' }}@endif>
-                                        <strong>กำหนดวัน</strong>
-                                    </label>
-                                    &nbsp;
-                                    <label>
-                                        <input type="radio" name="type" id="type"
-                                               value="2" @if($type==2){{ 'checked' }}@endif>
-                                        <strong>ไม่กำหนดวัน</strong>
-                                    </label>
+                                <label>หัวข้อสินค้า</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-bullhorn"></i>
+                                    </div>
+                                    <input class="form-control" type="text" name="name" id="name" value="{{ $name }}"
+                                           placeholder="หัวข้อสินค้า">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>วันที่ปิด:</label>
-                                <div class="input-group date">
+                                <label>จำนวนปลา / ตัว</label>
+                                <div class="input-group">
                                     <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
+                                        <i class="fa fa-plus"></i>
                                     </div>
-                                    <input type="text" class="form-control" name="expiredDate" id="expiredDate"
-                                           value="{{ $expiredDate }}" placeholder="mm/dd/yyyy" autocomplete="off">
+                                    <input type="number" class="form-control" name="qty" id="qty"
+                                           value="{{ $qty }}" placeholder="จำนวนปลา">
                                 </div>
-                                <!-- /.input group -->
+                            </div>
+                            <div class="form-group">
+                                <label>มีขายทั้งหมดกี่ชุด / ชุด</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                    <input type="number" class="form-control" name="numberSet" id="numberSet"
+                                           value="{{ $numberSet }}" placeholder="มีขายทั้งหมดกี่ชุด">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>ราคา</label>
@@ -90,6 +84,33 @@
                                            value="{{ $price }}" placeholder="ราคา">
                                 </div>
                             </div>
+                            @if(session('mb_type')==1)
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="type" id="type" value="1"
+                                            @if($type==1){{ 'checked' }}@endif>
+                                            <strong>กำหนดวัน</strong>
+                                        </label>
+                                        &nbsp;
+                                        <label>
+                                            <input type="radio" name="type" id="type"
+                                                   value="2" @if($type==2){{ 'checked' }}@endif>
+                                            <strong>ไม่กำหนดวัน</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>วันที่ปิด:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control" name="expiredDate" id="expiredDate"
+                                               value="{{ $expiredDate }}" placeholder="mm/dd/yyyy" autocomplete="off">
+                                    </div>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -122,6 +143,16 @@
                                 <label>รายละเอียด</label>
                                 <textarea class="form-control" name="remark" id="remark" cols="30" rows="3"
                                           placeholder="รายละเอียด">{{ $remark }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>ลิงค์ วีดีโอ</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="vdo" id="vdo"
+                                           value="{{ $vdo }}" placeholder="ลิงค์ วีดีโอ">
+                                </div>
                             </div>
                         </div>
                         <!-- /.box-body -->

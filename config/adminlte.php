@@ -144,7 +144,12 @@ return [
             'icon' => 'gears',
             'submenu' => [
                 [
-                    'text' => 'Bank',
+                    'text' => 'สายพันธุ์',
+                    'url' => 'config/category',
+                    'icon' => 'gears',
+                ],
+                [
+                    'text' => 'ธนาคาร',
                     'url' => 'config/bank',
                     'icon' => 'gears',
                 ],

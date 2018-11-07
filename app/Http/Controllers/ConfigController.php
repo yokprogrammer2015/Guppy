@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ConfigRequest;
 use App\Models\Bank;
+use App\Models\Category;
 use App\Models\GetModel;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class ConfigController extends Controller
 {
@@ -14,6 +14,29 @@ class ConfigController extends Controller
     public function __construct()
     {
         $this->model = new GetModel();
+    }
+
+    public function category()
+    {
+        $data['title'] = 'Config :';
+        $data['description'] = 'Category';
+
+        $data['category'] = Category::orderBy('name', 'asc')->get();
+
+        return view('config.category.list', $data);
+    }
+
+    public function addCategory($con_id = 0)
+    {
+        $data = array('title' => 'Add Category', 'description' => 'Category', 'con_id' => $con_id, 'name' => '', 'name_th' => '');
+
+        if ($con_id != 0) {
+            $row = Category::where('id', $con_id)->first();
+            $data['name'] = $row->name;
+            $data['name_th'] = $row->name_th;
+        }
+
+        return view('config.category.add', $data);
     }
 
     public function bank()
@@ -39,63 +62,31 @@ class ConfigController extends Controller
         return view('config.bank.add', $data);
     }
 
-    public function save(ConfigRequest $request)
+    public function save(Request $request)
     {
-        $cat_id = $request->cat_id;
+        $cat_id = $request->input('cat_id');
         $con_id = $request->input('con_id');
-        $con_name = $request->con_name;
-        $rou_id = $request->input('rou_id');
+        $con_name = $request->input('con_name');
         $con_code = $request->input('con_code');
-        $dep_id = $request->input('dep_id');
-        $arr_id = $request->input('arr_id');
-        $time_id = $request->input('time_id');
-        $time_to_id = $request->input('time_to_id');
-        if ($request->input('phone')) $phone = $request->input('phone'); else $phone = '';
-        if ($request->input('mobile')) $mobile = $request->input('mobile'); else $mobile = '';
-        if ($request->input('fax')) $fax = $request->input('fax'); else $fax = '';
+        $name = $request->input('name');
+        $name_th = $request->input('name_th');
 
         try {
             $db = $this->model->findBy($cat_id);
             if ($con_id == 0) { // Insert
+                if ($con_name) $db->con_name = $con_name; // bank
                 if ($con_code) $db->con_code = $con_code; // bank
-                if ($rou_id) $db->rou_id = $rou_id;
-                if ($phone) {
-                    $db->phone = $phone;
-                    $db->mobile = $mobile;
-                    $db->fax = $fax;
-                }
-                if ($dep_id) {
-                    $db->dep_id = $dep_id;
-                    $db->arr_id = $arr_id;
-                    $db->time_id = $time_id;
-                    $db->time_to_id = $time_to_id;
-                }
-                $db->con_name = $con_name;
+                if ($name) $db->name = $name; // category
+                if ($name_th) $db->name_th = $name_th; // category
                 $db->save();
             } else { // Update
-                $db->where('con_id', $con_id)->update(['con_name' => $con_name]);
+                if ($con_name) $db->where('con_id', $con_id)->update(['con_name' => $con_name]); // bank
                 if ($con_code) $db->where('con_id', $con_id)->update(['con_code' => $con_code]); // bank
-                if ($rou_id) $db->where('con_id', $con_id)->update(['rou_id' => $rou_id]);
-                if ($phone) {
-                    $db->where('con_id', $con_id)->update([
-                        'phone' => $phone,
-                        'mobile' => $mobile,
-                        'fax' => $fax
-                    ]);
-                }
-                if ($dep_id) {
-                    $db->where('con_id', $con_id)->update([
-                        'dep_id' => $dep_id,
-                        'arr_id' => $arr_id,
-                        'time_id' => $time_id,
-                        'time_to_id' => $time_to_id
-                    ]);
-                }
+                if ($name) $db->where('id', $con_id)->update(['name' => $name]); // category
+                if ($name_th) $db->where('id', $con_id)->update(['name_th' => $name_th]); // category
             }
-            Log::info('Config Save : ' . serialize($request->all()));
             return redirect('config/' . $cat_id)->with('message', 'Successful!');
         } catch (\Exception $exception) {
-            Log::error('Config Save : ', $exception);
             return $exception->getMessage();
         }
     }
@@ -108,10 +99,8 @@ class ConfigController extends Controller
 
                 $db->where('con_id', $con_id)->delete();
             }
-            Log::info('Config Remove : By | ' . session('member_name') . ' | CatID | ' . $cat_id . ' | ID | ' . $con_id);
             return redirect('config/' . $cat_id)->with('message', 'Remove Successful!');
         } catch (\Exception $exception) {
-            Log::error('Config Remove : ', $exception);
             return $exception->getMessage();
         }
     }

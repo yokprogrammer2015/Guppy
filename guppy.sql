@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database
--- Generation Time: Nov 06, 2018 at 08:36 AM
+-- Generation Time: Nov 07, 2018 at 03:22 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -1146,24 +1146,26 @@ INSERT INTO `branch` (`con_id`, `rou_id`, `con_name`, `phone`, `mobile`, `fax`, 
 CREATE TABLE `category` (
   `id` int(3) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `name_th` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `name_th` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `name_th`) VALUES
-(1, 'Mosaic', 'โมเสค'),
-(2, 'Tuxedo / Half black', 'ทักซิโด้ / ฮาฟแบ็ค'),
-(3, 'Grass', 'กราซ'),
-(4, 'Cobra', 'คอบบร้า'),
-(5, 'Snake skin', 'สเน็คสกิน'),
-(6, 'Solid', 'โซลิด'),
-(7, 'Albino', 'อัลบิโน่'),
-(8, 'Ribbon', 'ริบบอน'),
-(9, 'Swallow', 'สวอลโล'),
-(10, 'Open', 'อื่นๆ');
+INSERT INTO `category` (`id`, `name`, `name_th`, `creation_date`, `last_update`) VALUES
+(1, 'Mosaic', 'โมเสค', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(2, 'Tuxedo / Half black', 'ทักซิโด้ / ฮาฟแบ็ค', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(3, 'Grass', 'กราซ', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(4, 'Cobra', 'คอบบร้า', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(5, 'Snake skin', 'สเน็คสกิน', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(6, 'Solid', 'โซลิด', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(7, 'Albino', 'อัลบิโน่', '2018-08-02 08:15:53', '2018-11-07 03:22:03'),
+(8, 'Ribbon', 'ริบบอน', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(9, 'Swallow', 'สวอลโล', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
+(10, 'Open', 'อื่นๆ', '2018-08-02 08:15:53', '2018-08-02 08:15:53');
 
 -- --------------------------------------------------------
 
@@ -10091,9 +10093,8 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`mb_id`, `province_id`, `amphure_id`, `district_id`, `type_id`, `mb_name`, `mb_email`, `mb_password`, `id_card`, `mb_status`, `creation_date`, `last_update`) VALUES
-(1, 0, 0, 0, 1, 'Puchong', '2mocyc@gmail.com', '$2y$10$hbIVZvVbT/C6NSJuxtn/OeJDXBisgCtfLXNWiIFW6tOjI0A2B3pnS', '0', 0, '2018-08-06 02:57:06', '2018-08-13 08:18:09'),
-(2, 4, 72, 130701, 2, 'Yok', 'yokprogrammer@gmail.com', '$2y$10$hetlhIrF/y5pa4C6KmUQ4ORP3QERQPttGLJX1oP6t1TvtpxZNtpVK', '1130500052732', 0, '2018-08-10 08:49:03', '2018-11-05 03:16:14'),
-(3, 0, 0, 0, 1, 'Sutee', 'oaknakrab@gmail.com', '$2y$10$t0XMPUVJqewUh3jOpb7GMeVPydC0fhJmgT9FyEay/sI7hkMC25pSi', '0', 0, '2018-08-13 09:06:36', '2018-08-13 09:06:36');
+(1, 1, 36, 103603, 1, 'Puchong', '2mocyc@gmail.com', '$2y$10$LKOvIhdmbf4w3fDTN2gtCOJHlrUSUbRzTveeEpTbkA0ms//3/kKT2', '1130500052732', 0, '2018-08-06 02:57:06', '2018-11-07 02:28:17'),
+(2, 4, 72, 130701, 2, 'Yok', 'yokprogrammer@gmail.com', '$2y$10$hetlhIrF/y5pa4C6KmUQ4ORP3QERQPttGLJX1oP6t1TvtpxZNtpVK', '1130500052732', 0, '2018-08-10 08:49:03', '2018-11-05 03:16:14');
 
 -- --------------------------------------------------------
 
@@ -10125,10 +10126,13 @@ CREATE TABLE `order` (
   `cat_id` int(3) NOT NULL,
   `mb_id` int(10) NOT NULL,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `qty` int(3) NOT NULL,
+  `numberSet` int(3) NOT NULL,
   `type` int(1) NOT NULL,
   `expiredDate` date NOT NULL,
   `price` int(6) NOT NULL,
   `remark` text COLLATE utf8_unicode_ci NOT NULL,
+  `vdo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
   `pic1` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `pic2` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -10141,9 +10145,10 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`id`, `cat_id`, `mb_id`, `name`, `type`, `expiredDate`, `price`, `remark`, `status`, `pic1`, `pic2`, `pic3`, `creation_date`, `last_update`) VALUES
-(2, 7, 1, 'Full Red', 2, '2018-11-05', 300, 'Full Red Black Eye', 'Y', '181100021.jpg', '', '', '2018-11-06 08:05:41', '2018-11-06 08:05:41'),
-(3, 3, 1, 'Blue Grass', 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'Y', '181100031.jpg', '', '', '2018-11-06 08:02:39', '2018-11-06 08:02:39');
+INSERT INTO `order` (`id`, `cat_id`, `mb_id`, `name`, `qty`, `numberSet`, `type`, `expiredDate`, `price`, `remark`, `vdo`, `status`, `pic1`, `pic2`, `pic3`, `creation_date`, `last_update`) VALUES
+(2, 7, 1, 'Full Red', 2, 1, 2, '2018-11-05', 300, 'Full Red Black Eye', NULL, 'Y', '181100021.jpg', '', '', '2018-11-07 02:45:25', '2018-11-07 02:45:25'),
+(3, 3, 1, 'Blue Grass', 2, 5, 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100031.jpg', '', '', '2018-11-07 02:22:57', '2018-11-07 02:22:57'),
+(4, 2, 2, 'Tuxedo White', 2, 2, 2, '2018-11-07', 300, 'สีขาวเติม กระโดงยาว หางใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100041.jpg', '', '', '2018-11-07 02:34:56', '2018-11-07 02:34:56');
 
 -- --------------------------------------------------------
 
@@ -10373,7 +10378,7 @@ ALTER TABLE `member_type`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `provinces`

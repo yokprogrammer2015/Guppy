@@ -53,35 +53,17 @@ Route::group(['middleware' => 'my_auth'], function () { // Back End
     Route::post('admin/save/member', 'AdminController@saveMember');
 
 # Configuration
-    Route::get('config/branch', 'ConfigController@branch');
+    Route::any('config/category', 'ConfigController@category');
 
-    Route::get('config/add/branch/{id?}', 'ConfigController@addBranch');
+    Route::get('config/add/category/{id?}', 'ConfigController@addCategory');
 
-    Route::get('config/route', 'ConfigController@route');
-
-    Route::get('config/add/route/{id?}', 'ConfigController@addRoute');
-
-    Route::get('config/destination', 'ConfigController@destination');
-
-    Route::get('config/add/destination/{id?}', 'ConfigController@addDestination');
-
-    Route::get('config/bestSeller', 'ConfigController@bestSeller');
-
-    Route::get('config/add/bestSeller/{id?}', 'ConfigController@addBestSeller');
-
-    Route::get('config/time', 'ConfigController@time');
-
-    Route::get('config/add/time/{id?}', 'ConfigController@addTime');
-
-    Route::get('config/bank', 'ConfigController@bank');
+    Route::any('config/bank', 'ConfigController@bank');
 
     Route::get('config/add/bank/{id?}', 'ConfigController@addBank');
 
-    Route::get('config/remove/{category}/{id}', 'ConfigController@remove');
-
     Route::post('config/save', 'ConfigController@save');
 
-    Route::post('config/saveBestSeller', 'ConfigController@saveBestSeller');
+    Route::get('config/remove/{category}/{id}', 'ConfigController@remove');
 # Ajax
     Route::get('ajax/getDestination/{id}', 'AjaxController@getDestination');
 });

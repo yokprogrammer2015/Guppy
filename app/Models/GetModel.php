@@ -11,6 +11,9 @@ class GetModel extends Model
     public function findBy($id)
     {
         switch ($id) {
+            case "category":
+                $this->model = new Category();
+                break;
             case "bank":
                 $this->model = new Bank();
                 break;

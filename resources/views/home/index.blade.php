@@ -59,8 +59,9 @@
                                 <th width="8%">สายพันธุ์</th>
                                 <th width="15%">สินค้า</th>
                                 <th>รายละเอียด</th>
+                                <th width="10%">จำนวนปลา / ตัว</th>
                                 <th width="10%">ราคา / 1 ชุด</th>
-                                <th width="5%">จำนวน</th>
+                                <th width="7%">จำนวน / ชุด</th>
                                 <th width="5%">สั่งซื้อ</th>
                             </tr>
                             </thead>
@@ -76,10 +77,11 @@
                                     <td>{{ $row->category->name }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->remark }}</td>
+                                    <td>{{ $row->qty }}</td>
                                     <td>{{ $row->price }}</td>
                                     <td>
                                         <select name="" id="">
-                                            @for($i=1; $i<=10; $i++)
+                                            @for($i=1; $i<=$row->numberSet; $i++)
                                                 <option value="{{ $i }}">{{ $i }}</option>
                                             @endfor
                                         </select>
