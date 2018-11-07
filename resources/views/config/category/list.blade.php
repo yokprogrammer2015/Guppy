@@ -29,7 +29,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" name="name" id="name" placeholder="Search">
+                                    <input type="text" class="form-control" name="name" id="name" value="{{ $name }}"
+                                           placeholder="Search">
                                 </div>
                                 <div class="col-md-2">
                                     <button type="submit" class="btn btn-primary">Search</button>

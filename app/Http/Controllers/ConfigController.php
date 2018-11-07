@@ -10,18 +10,27 @@ use Illuminate\Http\Request;
 class ConfigController extends Controller
 {
     private $model;
+    private $category;
+    private $bank;
 
     public function __construct()
     {
         $this->model = new GetModel();
+        $this->category = new Category();
+        $this->bank = new Bank();
     }
 
-    public function category()
+    public function category(Request $request)
     {
         $data['title'] = 'Config :';
         $data['description'] = 'Category';
+        $data['name'] = $request->input('name');
 
-        $data['category'] = Category::orderBy('name', 'asc')->get();
+        $category = $this->category->where('id', '<>', '');
+        if ($data['name']) {
+            $category->where('name', $data['name']);
+        }
+        $data['category'] = $category->orderBy('name', 'asc')->get();
 
         return view('config.category.list', $data);
     }
@@ -39,12 +48,17 @@ class ConfigController extends Controller
         return view('config.category.add', $data);
     }
 
-    public function bank()
+    public function bank(Request $request)
     {
         $data['title'] = 'Config :';
         $data['description'] = 'Bank';
+        $data['name'] = $request->input('name');
 
-        $data['bank'] = Bank::orderBy('con_name', 'asc')->get();
+        $bank = $this->bank->where('con_name', '<>', '');
+        if ($data['name']) {
+            $bank->where('con_name', $data['name']);
+        }
+        $data['bank'] = $bank->orderBy('con_name', 'asc')->get();
 
         return view('config.bank.list', $data);
     }
