@@ -55,7 +55,7 @@ class AdminController extends Controller
             $data['mb_status'] = $row->mb_status;
         }
 
-        return view('admin.member.add')->with($data);
+        return view('admin.member.add', $data);
     }
 
     public function saveMember(MemberRequest $request)

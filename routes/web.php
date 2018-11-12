@@ -22,6 +22,11 @@ Route::get('admin', 'PermissionController@checkLogin');
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
+# Booking
+Route::post('booking/detail', 'BookingController@bookingDetail');
+
+Route::post('booking/save', 'BookingController@save');
+
 # Permission
 Route::post('login', 'PermissionController@checkLogin');
 

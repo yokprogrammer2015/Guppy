@@ -12,6 +12,14 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">ค้นหา</h3>
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -80,14 +88,16 @@
                                     <td>{{ $row->qty }}</td>
                                     <td>{{ $row->price }}</td>
                                     <td>
-                                        <select name="" id="">
+                                        <select name="number_set" id="number_set" onchange="numberSet(this.value)">
                                             @for($i=1; $i<=$row->numberSet; $i++)
                                                 <option value="{{ $i }}">{{ $i }}</option>
                                             @endfor
                                         </select>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-success">สั่งซื้อ</button>
+                                        <button type="button" class="btn btn-sm btn-success"
+                                                onclick="saveBooking({{$row->id}})">สั่งซื้อ
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -98,6 +108,12 @@
             </div>
         </div>
     </div>
+
+    <form id="saveBooking" action="{{ url('booking/detail') }}" method="post">
+        {{ csrf_field() }}
+        <input type="hidden" name="order_id" id="order_id" value="">
+        <input type="hidden" name="numberSet" id="numberSet" value="1">
+    </form>
 @stop
 
 @section('css')
@@ -115,6 +131,16 @@
                 'info': true,
                 'autoWidth': false
             })
-        })
+        });
+
+        function numberSet(val) {
+            $('#numberSet').val(val);
+        }
+
+        function saveBooking(order_id) {
+            var id = order_id;
+            $('#order_id').val(id);
+            $('#saveBooking').submit();
+        }
     </script>
 @stop
