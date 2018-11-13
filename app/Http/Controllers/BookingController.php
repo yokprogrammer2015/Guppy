@@ -59,6 +59,6 @@ class BookingController extends Controller
 
         $this->order->where('id', $order_id)->decrement('numberSet', $numberSet);
 
-        return redirect('guppy/list')->with('message', 'Successful!');
+        return redirect('guppy/list')->with('message', 'สั่งซื้อสำเร็จ!');
     }
 }

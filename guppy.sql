@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database
--- Generation Time: Nov 07, 2018 at 03:22 AM
+-- Generation Time: Nov 13, 2018 at 03:50 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -1095,9 +1095,31 @@ INSERT INTO `bank` (`con_id`, `con_name`, `con_code`, `creation_date`, `last_upd
 (2, 'กสิกรไทย', 'KBANK', '2018-08-02 08:16:30', '2018-08-02 08:16:30'),
 (3, 'กรุงเทพ', 'BBL', '2018-08-13 09:04:02', '2018-08-13 09:04:02'),
 (4, 'กรุงไทย', 'KTB', '2018-08-13 09:04:28', '2018-08-13 09:04:28'),
-(5, 'กรุงศรีอยุธยา', 'BAY', '2018-08-13 09:04:54', '2018-08-13 09:04:54'),
+(5, 'กรุงศรีอยุธยา', 'BAY', '2018-08-13 09:04:54', '2018-11-07 03:25:42'),
 (6, 'ทหารไทย', 'TMB', '2018-08-13 09:05:10', '2018-08-13 09:05:10'),
 (7, 'ออมสิน', 'GSB', '2018-08-13 09:05:24', '2018-08-13 09:05:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`id`, `order_id`, `customer_id`, `creation_date`, `last_update`) VALUES
+(1, 4, 1, '2018-11-12 07:26:06', '2018-11-12 07:26:06'),
+(2, 3, 2, '2018-11-12 07:53:19', '2018-11-12 07:53:19');
 
 -- --------------------------------------------------------
 
@@ -1166,6 +1188,30 @@ INSERT INTO `category` (`id`, `name`, `name_th`, `creation_date`, `last_update`)
 (8, 'Ribbon', 'ริบบอน', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
 (9, 'Swallow', 'สวอลโล', '2018-08-02 08:15:53', '2018-08-02 08:15:53'),
 (10, 'Open', 'อื่นๆ', '2018-08-02 08:15:53', '2018-08-02 08:15:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `name`, `phone`, `email`, `address`, `creation_date`, `last_update`) VALUES
+(1, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '88/124 ม.3 ต.ช้างใหญ่ อ.บางไทร จ.พระนครศรีอยุธยา 13290', '2018-11-12 07:26:06', '2018-11-12 07:26:06'),
+(2, 'Puchong', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-12 07:53:19', '2018-11-12 07:53:19');
 
 -- --------------------------------------------------------
 
@@ -10147,7 +10193,7 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`id`, `cat_id`, `mb_id`, `name`, `qty`, `numberSet`, `type`, `expiredDate`, `price`, `remark`, `vdo`, `status`, `pic1`, `pic2`, `pic3`, `creation_date`, `last_update`) VALUES
 (2, 7, 1, 'Full Red', 2, 1, 2, '2018-11-05', 300, 'Full Red Black Eye', NULL, 'Y', '181100021.jpg', '', '', '2018-11-07 02:45:25', '2018-11-07 02:45:25'),
-(3, 3, 1, 'Blue Grass', 2, 5, 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100031.jpg', '', '', '2018-11-07 02:22:57', '2018-11-07 02:22:57'),
+(3, 3, 1, 'Blue Grass', 2, 3, 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100031.jpg', '', '', '2018-11-07 02:22:57', '2018-11-12 07:53:19'),
 (4, 2, 2, 'Tuxedo White', 2, 2, 2, '2018-11-07', 300, 'สีขาวเติม กระโดงยาว หางใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100041.jpg', '', '', '2018-11-07 02:34:56', '2018-11-07 02:34:56');
 
 -- --------------------------------------------------------
@@ -10271,6 +10317,14 @@ ALTER TABLE `bank`
   ADD PRIMARY KEY (`con_id`);
 
 --
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
 -- Indexes for table `branch`
 --
 ALTER TABLE `branch`
@@ -10281,6 +10335,12 @@ ALTER TABLE `branch`
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -10345,6 +10405,12 @@ ALTER TABLE `bank`
   MODIFY `con_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `branch`
 --
 ALTER TABLE `branch`
@@ -10357,6 +10423,12 @@ ALTER TABLE `category`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `geographies`
 --
 ALTER TABLE `geographies`
@@ -10366,7 +10438,7 @@ ALTER TABLE `geographies`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `mb_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `mb_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `member_type`

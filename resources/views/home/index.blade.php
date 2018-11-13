@@ -79,7 +79,9 @@
                                     <td>{{ $k+1 }}</td>
                                     <td>
                                         @if($row->pic1)
-                                            <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}" class="img-thumbnail">
+                                            <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}"
+                                                 style="cursor: pointer" class="img-thumbnail"
+                                                 onclick="getImage({{$row->id.',1'}})">
                                         @endif
                                     </td>
                                     <td>{{ $row->category->name }}</td>
@@ -109,6 +111,27 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-default" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="showImage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="getImage1" class="btn btn-primary">รูปที่ 1</button>
+                    <button type="button" id="getImage2" class="btn btn-primary">รูปที่ 2</button>
+                    <button type="button" id="getImage3" class="btn btn-primary">รูปที่ 3</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <form id="saveBooking" action="{{ url('booking/detail') }}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="order_id" id="order_id" value="">
@@ -132,6 +155,34 @@
                 'autoWidth': false
             })
         });
+
+        function getImage(id, pic) {
+            $('#modal-default').modal('show');
+            $('.modal-title').html('');
+            $('#showImage').html('');
+            $.ajax({
+                type: 'GET',
+                url: '/api/getImage?orderId=' + id,
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data.data, function (index, element) {
+                        if (pic == 1 && element.pic1) {
+                            $('#showImage').append('<img src="/' + element.pic1 + '" class="img-thumbnail">');
+                        }
+                        if (pic == 2 && element.pic2) {
+                            $('#showImage').append('<img src="/' + element.pic2 + '" class="img-thumbnail">');
+                        }
+                        if (pic == 3 && element.pic3) {
+                            $('#showImage').append('<img src="/' + element.pic3 + '" class="img-thumbnail">');
+                        }
+                        $('.modal-title').append(element.name);
+                        $('#getImage1').attr('onClick', 'getImage(' + id + ',1)');
+                        $('#getImage2').attr('onClick', 'getImage(' + id + ',2)');
+                        $('#getImage3').attr('onClick', 'getImage(' + id + ',3)');
+                    });
+                }
+            });
+        }
 
         function numberSet(val) {
             $('#numberSet').val(val);

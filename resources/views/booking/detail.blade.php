@@ -52,6 +52,7 @@
                     </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">บันทึก</button>
+                        <button type="reset" class="btn btn-warning">ยกเลิก</button>
                     </div>
                 </form>
             </div>

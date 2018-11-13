@@ -12,6 +12,7 @@ class OrderController extends Controller
     private $order;
     private $category;
     private $getFunction;
+    protected $setData = [];
     protected $image1 = '';
     protected $image2 = '';
     protected $image3 = '';
@@ -72,6 +73,24 @@ class OrderController extends Controller
         }
 
         return view('order.guppy', $data);
+    }
+
+    public function getImage(Request $request)
+    {
+        $id = $request->input('orderId');
+
+        $order = $this->order->select('name', 'vdo', 'pic1', 'pic2', 'pic3')->where('id', $id)->get();
+        foreach ($order as $k => $row) {
+            if ($row->pic2) $pic2 = env('IMAGE_PATH') . $row->pic2; else $pic2 = '';
+            if ($row->pic3) $pic3 = env('IMAGE_PATH') . $row->pic3; else $pic3 = '';
+            $this->setData['data'][$k]['name'] = $row->name;
+            $this->setData['data'][$k]['vdo'] = $row->vdo;
+            $this->setData['data'][$k]['pic1'] = env('IMAGE_PATH') . $row->pic1;
+            $this->setData['data'][$k]['pic2'] = $pic2;
+            $this->setData['data'][$k]['pic3'] = $pic3;
+        }
+
+        return response()->json($this->setData);
     }
 
     public function save(Request $request)
