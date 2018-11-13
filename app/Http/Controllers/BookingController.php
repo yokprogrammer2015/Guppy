@@ -50,7 +50,7 @@ class BookingController extends Controller
             'last_update' => now()
         ]);
 
-        $this->booking->insert([
+        $booking_id = $this->booking->insertGetId([
             'order_id' => $order_id,
             'customer_id' => $customer_id,
             'creation_date' => now(),
@@ -59,6 +59,6 @@ class BookingController extends Controller
 
         $this->order->where('id', $order_id)->decrement('numberSet', $numberSet);
 
-        return redirect('guppy/list')->with('message', 'สั่งซื้อสำเร็จ!');
+        return redirect('payment?bookingId=' . $booking_id . '&customerId=' . $customer_id)->with('message', 'สั่งซื้อสำเร็จ!');
     }
 }

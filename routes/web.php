@@ -27,6 +27,11 @@ Route::post('booking/detail', 'BookingController@bookingDetail');
 
 Route::post('booking/save', 'BookingController@save');
 
+# Contact
+Route::get('payment', 'ContactController@payment');
+
+Route::post('payment/save', 'ContactController@save');
+
 # Permission
 Route::post('login', 'PermissionController@checkLogin');
 
