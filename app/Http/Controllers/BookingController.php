@@ -53,6 +53,7 @@ class BookingController extends Controller
         $booking_id = $this->booking->insertGetId([
             'order_id' => $order_id,
             'customer_id' => $customer_id,
+            'qty' => $numberSet,
             'creation_date' => now(),
             'last_update' => now()
         ]);
