@@ -38,6 +38,15 @@ Route::post('login', 'PermissionController@checkLogin');
 Route::any('logout', 'PermissionController@logout');
 
 Route::group(['middleware' => 'my_auth'], function () { // Back End
+# Booking
+    Route::any('payment/list', 'PaymentController@index');
+
+    Route::get('payment/add/{id?}', 'PaymentController@add');
+
+    Route::get('payment/remove/{id?}', 'PaymentController@remove');
+
+    Route::post('payment/save', 'PaymentController@save');
+
 # Order
     Route::any('order/list', 'OrderController@index');
 

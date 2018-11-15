@@ -75,7 +75,7 @@
                                     <i class="fa fa-money"></i>
                                 </div>
                                 <input type="number" class="form-control" name="amount" id="amount"
-                                       required placeholder="จำนวนเงิน">
+                                       value="{{ number_format($amount, 0) }}" required placeholder="จำนวนเงิน">
                             </div>
                         </div>
                         <div class="form-group">

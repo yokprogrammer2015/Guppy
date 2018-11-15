@@ -29,7 +29,7 @@ class HomeController extends Controller
         $data['name'] = $request->input('name');
         $data['category'] = $this->category->whereNotIn('id', [10])->orderBy('name', 'asc')->get();
 
-        $order = $this->order->where('status', 'Y');
+        $order = $this->order->where('numberSet', '>', 0)->where('status', 'Y');
         if ($data['cat_id']) {
             $order->where('cat_id', $data['cat_id']);
         }

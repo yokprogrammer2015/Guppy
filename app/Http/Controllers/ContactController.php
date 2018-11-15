@@ -23,6 +23,7 @@ class ContactController extends Controller
         $data['description'] = 'กรุณาอ่านรายละเอียดเพิ่มเติมด้านล่าง';
         $data['booking_id'] = $request->input('bookingId');
         $data['customer_id'] = $request->input('customerId');
+        $data['amount'] = $request->input('amount');
         $data['payDate'] = date('d/m/Y');
 
         return view('contact.payment', $data);
@@ -42,7 +43,8 @@ class ContactController extends Controller
             'amount' => $amount,
             'payDate' => $payDate,
             'payTime' => $payTime,
-            'tacking' => '',
+            'transport_id' => 1,
+            'tacking_no' => '',
             'creation_date' => now(),
             'last_update' => now()
         ]);

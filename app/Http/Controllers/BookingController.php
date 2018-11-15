@@ -40,6 +40,14 @@ class BookingController extends Controller
         $phone = $request->phone;
         $email = $request->email;
         $address = $request->address;
+        $amount = 0;
+
+        if ($order_id) {
+            $order = $this->order->select('price')->where('id', $order_id)->first();
+            if (count($order)) {
+                $amount = $order->price * $numberSet;
+            }
+        }
 
         $customer_id = $this->customer->insertGetId([
             'name' => $name,
@@ -54,12 +62,14 @@ class BookingController extends Controller
             'order_id' => $order_id,
             'customer_id' => $customer_id,
             'qty' => $numberSet,
+            'amount' => $amount,
+            'status' => 'Y',
             'creation_date' => now(),
             'last_update' => now()
         ]);
 
         $this->order->where('id', $order_id)->decrement('numberSet', $numberSet);
 
-        return redirect('payment?bookingId=' . $booking_id . '&customerId=' . $customer_id)->with('message', 'สั่งซื้อสำเร็จ!');
+        return redirect('payment?bookingId=' . $booking_id . '&customerId=' . $customer_id . '&amount=' . $amount)->with('message', 'สั่งซื้อสำเร็จ!');
     }
 }

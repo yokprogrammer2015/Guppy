@@ -114,14 +114,25 @@ return [
             'icon' => 'list-ol',
         ],
         [
-            'text' => 'รายการ',
-            'url' => 'order/list',
-            'icon' => 'list-ol',
+            'text' => 'สถานะสินค้า',
+            'url' => 'payment/list',
+            'icon' => 'cart-plus',
         ],
         [
-            'text' => 'เพิ่มรายการ',
-            'url' => 'order/guppy',
+            'text' => 'จัดการสินค้า',
             'icon' => 'plus-square',
+            'submenu' => [
+                [
+                    'text' => 'สินค้าทั้งหมด',
+                    'url' => 'order/list',
+                    'icon' => 'list-ol',
+                ],
+                [
+                    'text' => 'เพิ่มรายการ',
+                    'url' => 'order/guppy',
+                    'icon' => 'plus-square',
+                ],
+            ],
         ],
         [
             'text' => 'จัดการผู้ใช้',

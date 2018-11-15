@@ -29,7 +29,7 @@ class MenuFilter implements FilterInterface
             }
             return true;
         } else {
-            if ($px == 'รายการ' || $px == 'เพิ่มรายการ' || $px == 'จัดการผู้ใช้' || $px == 'ตั้งค่า') {
+            if ($px == 'จัดการสินค้า' || $px == 'จัดการผู้ใช้' || $px == 'ตั้งค่า') {
                 return false;
             }
             return true;
