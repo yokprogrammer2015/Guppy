@@ -29,9 +29,9 @@ class Payment extends Model
     public function getStatus($status)
     {
         if ($status == 'Y') {
-            $this->status = '<span class="badge bg-green">Complete</span>';
+            $this->status = '<span class="badge bg-green">รอรับสินค้า</span>';
         } else {
-            $this->status = '<span class="badge bg-red">Close</span>';
+            $this->status = '<span class="badge bg-red">ปิดการขาย</span>';
         }
 
         return $this->status;

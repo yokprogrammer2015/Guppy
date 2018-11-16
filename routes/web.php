@@ -28,9 +28,12 @@ Route::post('booking/detail', 'BookingController@bookingDetail');
 Route::post('booking/save', 'BookingController@save');
 
 # Contact
-Route::get('payment', 'ContactController@payment');
+Route::get('contact/payment', 'ContactController@payment');
 
-Route::post('payment/save', 'ContactController@save');
+Route::post('contact/payment/save', 'ContactController@save');
+
+# Payment
+Route::any('payment/list', 'PaymentController@index');
 
 # Permission
 Route::post('login', 'PermissionController@checkLogin');
@@ -39,8 +42,6 @@ Route::any('logout', 'PermissionController@logout');
 
 Route::group(['middleware' => 'my_auth'], function () { // Back End
 # Booking
-    Route::any('payment/list', 'PaymentController@index');
-
     Route::get('payment/add/{id?}', 'PaymentController@add');
 
     Route::get('payment/remove/{id?}', 'PaymentController@remove');

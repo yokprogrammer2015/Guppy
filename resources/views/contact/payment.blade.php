@@ -42,7 +42,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="{{ url('payment/save') }}" method="post">
+                <form role="form" action="{{ url('contact/payment/save') }}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="booking_id" id="booking_id" value="{{ $booking_id }}">
                     <input type="hidden" name="customer_id" id="customer_id" value="{{ $customer_id }}">

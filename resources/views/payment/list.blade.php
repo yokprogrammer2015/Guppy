@@ -62,33 +62,38 @@
                                 <th width="8%">ขนส่ง</th>
                                 <th width="7%">เลขพัสดุ</th>
                                 <th width="10%">สถานะ</th>
-                                <th width="7%">ปิดการขาย</th>
-                                <th width="5%">แก้ไข</th>
+                                @if(session('mb_type')==1)
+                                    <th width="7%">ปิดการขาย</th>
+                                    <th width="5%">แก้ไข</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($payment as $k => $row)
                                 <tr role="row">
                                     <td>{{ $k+1 }}</td>
-                                    <td>{{ $row->booking_id }}</td>
+                                    <td>{{ 'GT'.$row->booking_id }}</td>
                                     <td>{{ $row->customer->name }}</td>
                                     <td>{{ $row->amount }}</td>
                                     <td>{{ $row->payDate.' '.$row->payTime }}</td>
                                     <td>{{ $row->transport->name }}</td>
                                     <td>{{ $row->tacking_no }}</td>
                                     <td>{!! $row->getStatus($row->booking->status) !!}</td>
-                                    <td>
-                                        @if($row->booking->status=='Y')
-                                            <a href="{{ url('payment/remove/'.$row->booking_id) }}">
-                                                <button type="button" class="btn btn-sm btn-danger">ปิดการขาย</button>
+                                    @if(session('mb_type')==1)
+                                        <td>
+                                            @if($row->booking->status=='Y')
+                                                <a href="{{ url('payment/remove/'.$row->booking_id) }}">
+                                                    <button type="button" class="btn btn-sm btn-danger">ปิดการขาย
+                                                    </button>
+                                                </a>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('payment/add/'.$row->id) }}">
+                                                <button type="button" class="btn btn-sm btn-primary">แก้ไข</button>
                                             </a>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{ url('payment/add/'.$row->id) }}">
-                                            <button type="button" class="btn btn-sm btn-primary">แก้ไข</button>
-                                        </a>
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

@@ -70,6 +70,6 @@ class BookingController extends Controller
 
         $this->order->where('id', $order_id)->decrement('numberSet', $numberSet);
 
-        return redirect('payment?bookingId=' . $booking_id . '&customerId=' . $customer_id . '&amount=' . $amount)->with('message', 'สั่งซื้อสำเร็จ!');
+        return redirect('contact/payment?bookingId=' . $booking_id . '&customerId=' . $customer_id . '&amount=' . $amount)->with('message', 'สั่งซื้อสำเร็จ!');
     }
 }

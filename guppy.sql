@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database
--- Generation Time: Nov 13, 2018 at 08:34 AM
+-- Generation Time: Nov 16, 2018 at 04:15 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -1110,6 +1110,8 @@ CREATE TABLE `booking` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `qty` int(3) NOT NULL,
+  `amount` int(6) NOT NULL,
+  `status` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
   `creation_date` datetime NOT NULL,
   `last_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1118,13 +1120,8 @@ CREATE TABLE `booking` (
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`id`, `order_id`, `customer_id`, `qty`, `creation_date`, `last_update`) VALUES
-(1, 4, 1, 0, '2018-11-12 07:26:06', '2018-11-12 07:26:06'),
-(2, 3, 2, 0, '2018-11-12 07:53:19', '2018-11-12 07:53:19'),
-(3, 4, 3, 0, '2018-11-13 06:44:31', '2018-11-13 06:44:31'),
-(4, 4, 4, 0, '2018-11-13 06:44:55', '2018-11-13 06:44:55'),
-(5, 4, 5, 0, '2018-11-13 08:11:14', '2018-11-13 08:11:14'),
-(6, 3, 6, 2, '2018-11-13 08:33:58', '2018-11-13 08:33:58');
+INSERT INTO `booking` (`id`, `order_id`, `customer_id`, `qty`, `amount`, `status`, `creation_date`, `last_update`) VALUES
+(1, 4, 11, 2, 600, 'Y', '2018-11-16 02:40:16', '2018-11-16 02:40:16');
 
 -- --------------------------------------------------------
 
@@ -1220,7 +1217,12 @@ INSERT INTO `customer` (`id`, `name`, `phone`, `email`, `address`, `creation_dat
 (3, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '476/1', '2018-11-13 06:44:31', '2018-11-13 06:44:31'),
 (4, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '476/1', '2018-11-13 06:44:55', '2018-11-13 06:44:55'),
 (5, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '476/1', '2018-11-13 08:11:13', '2018-11-13 08:11:13'),
-(6, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-13 08:33:58', '2018-11-13 08:33:58');
+(6, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-13 08:33:58', '2018-11-13 08:33:58'),
+(7, 'Puchong', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-14 02:21:57', '2018-11-14 02:21:57'),
+(8, 'tira 8558', '0991808558', '2mocyc@gmail.com', '88/124', '2018-11-16 02:31:30', '2018-11-16 02:31:30'),
+(9, 'tira 8558', '0991808558', '2mocyc@gmail.com', '88/124', '2018-11-16 02:33:38', '2018-11-16 02:33:38'),
+(10, 'tira 8558', '0991808558', '2mocyc@gmail.com', '88/124', '2018-11-16 02:35:13', '2018-11-16 02:35:13'),
+(11, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-16 02:40:16', '2018-11-16 02:40:16');
 
 -- --------------------------------------------------------
 
@@ -10201,9 +10203,9 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `cat_id`, `mb_id`, `name`, `qty`, `numberSet`, `type`, `expiredDate`, `price`, `remark`, `vdo`, `status`, `pic1`, `pic2`, `pic3`, `creation_date`, `last_update`) VALUES
-(2, 7, 1, 'Full Red', 2, 1, 2, '2018-11-05', 300, 'Full Red Black Eye', NULL, 'Y', '181100021.jpg', '', '', '2018-11-07 02:45:25', '2018-11-07 02:45:25'),
-(3, 3, 1, 'Blue Grass', 2, 1, 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100031.jpg', '', '', '2018-11-07 02:22:57', '2018-11-13 08:33:58'),
-(4, 2, 2, 'Tuxedo White', 2, -1, 2, '2018-11-07', 300, 'สีขาวเติม กระโดงยาว หางใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100041.jpg', '', '', '2018-11-07 02:34:56', '2018-11-13 08:11:14');
+(2, 7, 1, 'Full Red', 2, 8, 2, '2018-11-05', 300, 'Full Red Black Eye', NULL, 'Y', '181100021.jpg', '', '', '2018-11-07 02:45:25', '2018-11-16 02:33:38'),
+(3, 3, 1, 'Blue Grass', 2, 10, 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100031.jpg', '', '', '2018-11-07 02:22:57', '2018-11-16 02:31:30'),
+(4, 2, 2, 'Tuxedo White', 2, 2, 2, '2018-11-07', 300, 'สีขาวเติม กระโดงยาว หางใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100041.jpg', '', '', '2018-11-07 02:34:56', '2018-11-16 02:40:16');
 
 -- --------------------------------------------------------
 
@@ -10218,7 +10220,8 @@ CREATE TABLE `payment` (
   `amount` int(7) NOT NULL,
   `payDate` date NOT NULL,
   `payTime` time NOT NULL,
-  `tacking` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `transport_id` int(2) NOT NULL,
+  `tacking_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `creation_date` datetime NOT NULL,
   `last_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -10227,8 +10230,8 @@ CREATE TABLE `payment` (
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`id`, `booking_id`, `customer_id`, `amount`, `payDate`, `payTime`, `tacking`, `creation_date`, `last_update`) VALUES
-(1, 5, 5, 300, '2018-11-13', '15:14:00', '', '2018-11-13 08:14:29', '2018-11-13 08:14:29');
+INSERT INTO `payment` (`id`, `booking_id`, `customer_id`, `amount`, `payDate`, `payTime`, `transport_id`, `tacking_no`, `creation_date`, `last_update`) VALUES
+(1, 1, 11, 600, '2018-11-16', '12:11:00', 1, '', '2018-11-16 02:52:07', '2018-11-16 02:52:07');
 
 -- --------------------------------------------------------
 
@@ -10326,6 +10329,25 @@ INSERT INTO `provinces` (`id`, `code`, `name_th`, `name_en`, `geography_id`) VAL
 (75, '95', 'ยะลา', 'Yala', 6),
 (76, '96', 'นราธิวาส', 'Narathiwat', 6),
 (77, '97', 'บึงกาฬ', 'buogkan', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transport`
+--
+
+CREATE TABLE `transport` (
+  `id` int(2) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `transport`
+--
+
+INSERT INTO `transport` (`id`, `name`) VALUES
+(1, 'KERRY'),
+(2, 'EMS');
 
 --
 -- Indexes for dumped tables
@@ -10425,6 +10447,12 @@ ALTER TABLE `provinces`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transport`
+--
+ALTER TABLE `transport`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -10450,7 +10478,7 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `branch`
@@ -10468,7 +10496,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `geographies`
@@ -10505,6 +10533,12 @@ ALTER TABLE `payment`
 --
 ALTER TABLE `provinces`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT for table `transport`
+--
+ALTER TABLE `transport`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
