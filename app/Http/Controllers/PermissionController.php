@@ -29,7 +29,7 @@ class PermissionController extends Controller
                         $request->session()->put('mb_email', $val->mb_email);
                         $request->session()->put('mb_type', $val->type_id);
 
-                        return redirect('order/list');
+                        return redirect('payment/list');
                     } else {
                         return redirect('login');
                     }
