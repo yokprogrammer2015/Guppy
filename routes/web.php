@@ -35,6 +35,9 @@ Route::post('contact/payment/save', 'ContactController@save');
 # Payment
 Route::any('payment/list', 'PaymentController@index');
 
+# Article
+Route::any('article/list', 'ArticleController@index');
+
 # Permission
 Route::post('login', 'PermissionController@checkLogin');
 
@@ -47,6 +50,13 @@ Route::group(['middleware' => 'my_auth'], function () { // Back End
     Route::get('payment/remove/{id?}', 'PaymentController@remove');
 
     Route::post('payment/save', 'PaymentController@save');
+
+# Article
+    Route::get('article/add/{id?}', 'ArticleController@add');
+
+    Route::get('article/remove/{id?}', 'ArticleController@remove');
+
+    Route::post('article/save', 'ArticleController@save');
 
 # Order
     Route::any('order/list', 'OrderController@index');

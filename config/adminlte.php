@@ -119,6 +119,11 @@ return [
             'icon' => 'cart-plus',
         ],
         [
+            'text' => 'บทความ',
+            'url' => 'article/list',
+            'icon' => 'book',
+        ],
+        [
             'text' => 'จัดการสินค้า',
             'icon' => 'plus-square',
             'submenu' => [
