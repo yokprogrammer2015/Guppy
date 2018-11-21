@@ -54,7 +54,7 @@ class ArticleController extends Controller
         $detail = $request->input('detail');
         $pic1 = $request->file('pic1');
         $pic1_val = $request->input('pic1_val');
-        $running = rand(1111111111, 9999999999);
+        $running = 'article' . rand(1111111111, 9999999999);
 
         if ($pic1_val) {
             $this->image1 = $pic1_val;
