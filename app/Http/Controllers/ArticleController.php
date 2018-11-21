@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Eventviva\ImageResize;
 use Illuminate\Http\Request;
@@ -47,11 +48,11 @@ class ArticleController extends Controller
         return view('article.add', $data);
     }
 
-    public function save(Request $request)
+    public function save(ArticleRequest $request)
     {
         $id = $request->input('id');
-        $topic = $request->input('topic');
-        $detail = $request->input('detail');
+        $topic = $request->topic;
+        $detail = $request->detail;
         $pic1 = $request->file('pic1');
         $pic1_val = $request->input('pic1_val');
         $running = 'article' . rand(1111111111, 9999999999);
