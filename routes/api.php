@@ -18,7 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 # Image Order
-Route::get('getImage', 'OrderController@getImage');
+Route::get('getImageOrder', 'OrderController@getImage');
+
+# Image Article
+Route::get('getImageArticle', 'ArticleController@getImage');
 
 # Amphure
 Route::get('amphure/{id}', 'AjaxController@getAmphure');

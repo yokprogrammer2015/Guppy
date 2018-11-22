@@ -65,7 +65,8 @@
                             <tr role="row" class="bg-primary">
                                 <th width="5%">ลำดับ</th>
                                 <th width="10%">รูป</th>
-                                <th>หัวข้อ</th>
+                                <th width="15%">หัวข้อ</th>
+                                <th>รายละเอียด</th>
                                 <th width="10%">วันที่ประกาศ</th>
                                 @if(session('mb_type')==1)
                                     <th width="7%">ลบ</th>
@@ -79,10 +80,13 @@
                                     <td>{{ $k+1 }}</td>
                                     <td>
                                         @if($row->pic1)
-                                            <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}" class="img-thumbnail">
+                                            <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}"
+                                                 style="cursor: pointer" class="img-thumbnail"
+                                                 onclick="getImage({{$row->id.',1'}})">
                                         @endif
                                     </td>
                                     <td>{{ $row->topic }}</td>
+                                    <td>{{ $row->detail }}</td>
                                     <td>{{ $row->creation_date }}</td>
                                     @if(session('mb_type')==1)
                                         <td>
@@ -108,6 +112,25 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal-default" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="showDetail"></p>
+                    <p id="showImage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('css')
@@ -125,6 +148,24 @@
                 'info': true,
                 'autoWidth': false
             })
-        })
+        });
+
+        function getImage(id) {
+            $('#modal-default').modal('show');
+            $('.modal-title').html('');
+            $('#showImage').html('');
+            $.ajax({
+                type: 'GET',
+                url: '/api/getImageArticle?articleId=' + id,
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data.data, function (index, element) {
+                        $('#showDetail').append(element.detail);
+                        $('#showImage').append('<img src="/' + element.pic1 + '" class="img-thumbnail">');
+                        $('.modal-title').append(element.topic);
+                    });
+                }
+            });
+        }
     </script>
 @stop

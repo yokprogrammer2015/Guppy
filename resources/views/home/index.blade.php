@@ -162,7 +162,7 @@
             $('#showImage').html('');
             $.ajax({
                 type: 'GET',
-                url: '/api/getImage?orderId=' + id,
+                url: '/api/getImageOrder?orderId=' + id,
                 dataType: 'json',
                 success: function (data) {
                     $.each(data.data, function (index, element) {

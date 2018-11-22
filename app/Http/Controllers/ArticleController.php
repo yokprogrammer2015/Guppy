@@ -11,6 +11,7 @@ class ArticleController extends Controller
 {
     private $article;
     protected $image1 = '';
+    protected $setData = [];
 
     public function __construct()
     {
@@ -46,6 +47,20 @@ class ArticleController extends Controller
         }
 
         return view('article.add', $data);
+    }
+
+    public function getImage(Request $request)
+    {
+        $id = $request->input('articleId');
+
+        $article = $this->article->where('id', $id)->get();
+        foreach ($article as $k => $row) {
+            $this->setData['data'][$k]['topic'] = $row->topic;
+            $this->setData['data'][$k]['detail'] = $row->detail;
+            $this->setData['data'][$k]['pic1'] = env('IMAGE_PATH') . $row->pic1;
+        }
+
+        return response()->json($this->setData);
     }
 
     public function save(ArticleRequest $request)
