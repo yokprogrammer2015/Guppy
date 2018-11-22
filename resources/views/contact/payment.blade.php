@@ -12,14 +12,6 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ $description }}</h3>
-                    @if(session()->has('message'))
-                        <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            {{ session()->get('message') }}
-                        </div>
-                    @endif
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -39,6 +31,15 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ $title }}</h3>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -61,7 +62,7 @@
                                     <td>
                                         <p>ธนาคาร : ธนาคารไทยพาณิชย์ (SCB)</p>
                                         <p>เลขที่บัญชี : XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-                                        <p>ชื่อบัญชี : XXXXXXXXXXXXXXXXXXXXXX</p>
+                                        <p>ชื่อบัญชี : ภุชงค์ บัวสด</p>
                                         <p>ประเภท : บัญชีเงินฝากออมทรัพย์</p>
                                     </td>
                                 </tr>
@@ -75,17 +76,17 @@
                                     <i class="fa fa-money"></i>
                                 </div>
                                 <input type="number" class="form-control" name="amount" id="amount"
-                                       value="{{ number_format($amount, 0) }}" required placeholder="จำนวนเงิน">
+                                       value="{{ number_format($amount, 0) }}" placeholder="จำนวนเงิน">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>วันที่โอน</label>
-                            <div class="input-group date">
+                            <div class="input-group date" id="datePicker">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" class="form-control" name="payDate" id="datePicker"
-                                       value="{{ $payDate }}" required placeholder="วว/ดด/ปป">
+                                <input type="text" class="form-control" name="payDate"
+                                       value="{{ $payDate }}" readonly placeholder="วว/ดด/ปป">
                             </div>
                         </div>
                         <div class="form-group">
@@ -94,7 +95,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
                                 </div>
-                                <input type="time" class="form-control" name="payTime" required
+                                <input type="time" class="form-control" name="payTime"
                                        placeholder="เวลาที่โอน">
                             </div>
                         </div>

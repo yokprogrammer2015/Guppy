@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AllFunction;
+use App\Http\Requests\PaymentRequest;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -29,13 +30,13 @@ class ContactController extends Controller
         return view('contact.payment', $data);
     }
 
-    public function save(Request $request)
+    public function save(PaymentRequest $request)
     {
         $booking_id = $request->input('booking_id');
         $customer_id = $request->input('customer_id');
-        $amount = $request->input('amount');
-        if ($request->input('payDate')) $payDate = $this->allFunction->convertDateFormat($request->input('payDate')); else $payDate = '0000-00-00';
-        $payTime = $request->input('payTime');
+        $amount = $request->amount;
+        if ($request->payDate) $payDate = $this->allFunction->convertDateFormat($request->payDate); else $payDate = '0000-00-00';
+        $payTime = $request->payTime;
 
         $this->payment->insert([
             'booking_id' => $booking_id,
@@ -49,6 +50,6 @@ class ContactController extends Controller
             'last_update' => now()
         ]);
 
-        return redirect('guppy/list')->with('message', 'สั่งซื้อสำเร็จ!');
+        return redirect('guppy/list')->with('message', 'สั่งซื้อสำเร็จ! ทีมงานจะจัดส่งปลาภายใน 24 ชั่วโมง ขอบคุณค่ะ');
     }
 }
