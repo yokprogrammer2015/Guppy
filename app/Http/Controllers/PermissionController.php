@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PermissionController extends Controller
 {
@@ -35,8 +36,11 @@ class PermissionController extends Controller
                     }
                 }
             }
+
+            Log::info('Login : ' . serialize($request->all()));
             return redirect('login');
         } catch (\Exception $exception) {
+            Log::info('Login : ', $exception->getTrace());
             return $exception->getMessage();
         }
     }

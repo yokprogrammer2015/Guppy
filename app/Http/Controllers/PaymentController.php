@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Transport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -52,15 +53,21 @@ class PaymentController extends Controller
 
     public function save(Request $request)
     {
-        $id = $request->input('id');
-        $transport_id = $request->input('transport_id');
-        $tacking_no = strtoupper($request->input('tacking_no'));
+        try {
+            $id = $request->input('id');
+            $transport_id = $request->input('transport_id');
+            $tacking_no = strtoupper($request->input('tacking_no'));
 
-        $this->payment->where('id', $id)->update([
-            'transport_id' => $transport_id,
-            'tacking_no' => $tacking_no
-        ]);
+            $this->payment->where('id', $id)->update([
+                'transport_id' => $transport_id,
+                'tacking_no' => $tacking_no
+            ]);
 
-        return redirect('payment/list')->with('message', 'ทำรายการสำเร็จ!');
+            Log::info('Payment Save : ' . serialize($request->all()));
+            return redirect('payment/list')->with('message', 'ทำรายการสำเร็จ!');
+        } catch (\Exception $exception) {
+            Log::info('Payment Save : ', $exception->getTrace());
+            return $exception->getMessage();
+        }
     }
 }

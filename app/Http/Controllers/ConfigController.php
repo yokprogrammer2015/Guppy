@@ -6,6 +6,7 @@ use App\Models\Bank;
 use App\Models\Category;
 use App\Models\GetModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ConfigController extends Controller
 {
@@ -78,17 +79,15 @@ class ConfigController extends Controller
 
     public function save(Request $request)
     {
-        $cat_id = $request->input('cat_id');
-        $id = $request->input('id');
-        $name = $request->input('name');
-        $code = $request->input('code');
-        $name = $request->input('name');
-        $name_th = $request->input('name_th');
-
         try {
+            $cat_id = $request->input('cat_id');
+            $id = $request->input('id');
+            $name = $request->input('name');
+            $code = $request->input('code');
+            $name_th = $request->input('name_th');
+
             $db = $this->model->findBy($cat_id);
             if ($id == 0) { // Insert
-                if ($name) $db->name = $name; // bank
                 if ($code) $db->code = $code; // bank
                 if ($name) $db->name = $name; // category
                 if ($name_th) $db->name_th = $name_th; // category
@@ -99,8 +98,11 @@ class ConfigController extends Controller
                 if ($name) $db->where('id', $id)->update(['name' => $name]); // category
                 if ($name_th) $db->where('id', $id)->update(['name_th' => $name_th]); // category
             }
+
+            Log::info('Config Save : ' . serialize($request->all()));
             return redirect('config/' . $cat_id)->with('message', 'Successful!');
         } catch (\Exception $exception) {
+            Log::info('Config Save : ', $exception->getTrace());
             return $exception->getMessage();
         }
     }
@@ -113,8 +115,11 @@ class ConfigController extends Controller
 
                 $db->where('id', $id)->delete();
             }
+
+            Log::info('Config Remove : CatID | ' . $cat_id . ' | ID | ' . $id);
             return redirect('config/' . $cat_id)->with('message', 'Remove Successful!');
         } catch (\Exception $exception) {
+            Log::info('Config Remove : ', $exception->getTrace());
             return $exception->getMessage();
         }
     }
