@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database
--- Generation Time: Nov 21, 2018 at 06:55 AM
+-- Generation Time: Nov 26, 2018 at 06:15 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -1087,6 +1087,13 @@ CREATE TABLE `article` (
   `last_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `article`
+--
+
+INSERT INTO `article` (`id`, `topic`, `detail`, `pic1`, `creation_date`, `last_update`) VALUES
+(1, 'ทดสอบระบบ', 'วิธีการทำคลอดปลา', 'article2186110305.jpg', '2018-11-22 02:02:45', '2018-11-22 02:02:45');
+
 -- --------------------------------------------------------
 
 --
@@ -1094,9 +1101,9 @@ CREATE TABLE `article` (
 --
 
 CREATE TABLE `bank` (
-  `con_id` int(3) NOT NULL,
-  `con_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `con_code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(3) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `creation_date` datetime NOT NULL,
   `last_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1105,7 +1112,7 @@ CREATE TABLE `bank` (
 -- Dumping data for table `bank`
 --
 
-INSERT INTO `bank` (`con_id`, `con_name`, `con_code`, `creation_date`, `last_update`) VALUES
+INSERT INTO `bank` (`id`, `name`, `code`, `creation_date`, `last_update`) VALUES
 (1, 'ไทยพาณิชย์', 'SCB', '2018-08-02 08:15:53', '2018-08-02 08:16:03'),
 (2, 'กสิกรไทย', 'KBANK', '2018-08-02 08:16:30', '2018-08-02 08:16:30'),
 (3, 'กรุงเทพ', 'BBL', '2018-08-13 09:04:02', '2018-08-13 09:04:02'),
@@ -1140,7 +1147,10 @@ INSERT INTO `booking` (`id`, `order_id`, `customer_id`, `qty`, `amount`, `status
 (2, 4, 12, 1, 300, 'Y', '2018-11-19 02:36:11', '2018-11-19 02:36:11'),
 (3, 4, 13, 1, 300, 'Y', '2018-11-19 02:38:35', '2018-11-19 02:38:35'),
 (4, 4, 14, 1, 300, 'Y', '2018-11-19 03:38:36', '2018-11-19 03:38:36'),
-(5, 4, 15, 1, 300, 'Y', '2018-11-19 03:45:23', '2018-11-19 03:45:23');
+(5, 4, 15, 1, 300, 'Y', '2018-11-19 03:45:23', '2018-11-19 03:45:23'),
+(6, 3, 16, 1, 300, 'Y', '2018-11-22 03:03:05', '2018-11-22 03:03:05'),
+(7, 3, 17, 1, 300, 'Y', '2018-11-22 03:23:13', '2018-11-22 03:23:13'),
+(8, 3, 18, 1, 300, 'Y', '2018-11-26 06:14:43', '2018-11-26 06:14:43');
 
 -- --------------------------------------------------------
 
@@ -1149,9 +1159,9 @@ INSERT INTO `booking` (`id`, `order_id`, `customer_id`, `qty`, `amount`, `status
 --
 
 CREATE TABLE `branch` (
-  `con_id` int(3) NOT NULL,
+  `id` int(3) NOT NULL,
   `rou_id` int(3) NOT NULL,
-  `con_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `mobile` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `fax` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -1163,7 +1173,7 @@ CREATE TABLE `branch` (
 -- Dumping data for table `branch`
 --
 
-INSERT INTO `branch` (`con_id`, `rou_id`, `con_name`, `phone`, `mobile`, `fax`, `creation_date`, `last_update`) VALUES
+INSERT INTO `branch` (`id`, `rou_id`, `name`, `phone`, `mobile`, `fax`, `creation_date`, `last_update`) VALUES
 (1, 1, 'Khaosan', '', '', '', '2018-08-13 08:40:50', '2018-08-13 08:40:50'),
 (2, 1, 'Khaosan Bus', '02-280-7897', '081-917-5148', '02-282-3830', '2018-08-13 08:41:18', '2018-08-16 08:30:09'),
 (3, 1, 'Khaosan Marketing', '', '', '', '2018-08-13 08:42:05', '2018-08-13 08:42:05'),
@@ -1245,7 +1255,10 @@ INSERT INTO `customer` (`id`, `name`, `phone`, `email`, `address`, `creation_dat
 (12, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-19 02:36:11', '2018-11-19 02:36:11'),
 (13, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-19 02:38:35', '2018-11-19 02:38:35'),
 (14, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-19 03:38:36', '2018-11-19 03:38:36'),
-(15, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-19 03:45:23', '2018-11-19 03:45:23');
+(15, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-19 03:45:23', '2018-11-19 03:45:23'),
+(16, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-22 03:03:05', '2018-11-22 03:03:05'),
+(17, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-22 03:23:13', '2018-11-22 03:23:13'),
+(18, 'ภุชงค์ บัวสด', '0838989572', '2mocyc@gmail.com', '233/23', '2018-11-26 06:14:43', '2018-11-26 06:14:43');
 
 -- --------------------------------------------------------
 
@@ -10183,15 +10196,15 @@ INSERT INTO `member` (`mb_id`, `province_id`, `amphure_id`, `district_id`, `type
 --
 
 CREATE TABLE `member_type` (
-  `con_id` int(2) NOT NULL,
-  `con_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `id` int(2) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `member_type`
 --
 
-INSERT INTO `member_type` (`con_id`, `con_name`) VALUES
+INSERT INTO `member_type` (`id`, `name`) VALUES
 (1, 'Admin'),
 (2, 'User');
 
@@ -10227,7 +10240,7 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`id`, `cat_id`, `mb_id`, `name`, `qty`, `numberSet`, `type`, `expiredDate`, `price`, `remark`, `vdo`, `status`, `pic1`, `pic2`, `pic3`, `creation_date`, `last_update`) VALUES
 (2, 7, 1, 'Full Red', 2, 8, 2, '2018-11-05', 300, 'Full Red Black Eye', NULL, 'Y', '181100021.jpg', '', '', '2018-11-07 02:45:25', '2018-11-16 02:33:38'),
-(3, 3, 1, 'Blue Grass', 2, 10, 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100031.jpg', '', '', '2018-11-07 02:22:57', '2018-11-16 02:31:30'),
+(3, 3, 1, 'Blue Grass', 2, 7, 1, '2018-11-06', 300, 'มาร์คสวย กระโดงใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100031.jpg', '', '', '2018-11-07 02:22:57', '2018-11-26 06:14:43'),
 (4, 2, 2, 'Tuxedo White', 2, -2, 2, '2018-11-07', 300, 'สีขาวเติม กระโดงยาว หางใหญ่', 'https://www.youtube.com/watch?v=wqJsZYibWcI&start_radio=1&list=RDMMwqJsZYibWcI', 'Y', '181100041.jpg', '', '', '2018-11-07 02:34:56', '2018-11-19 03:45:23');
 
 -- --------------------------------------------------------
@@ -10254,7 +10267,9 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `booking_id`, `customer_id`, `amount`, `payDate`, `payTime`, `transport_id`, `tacking_no`, `creation_date`, `last_update`) VALUES
-(1, 1, 11, 600, '2018-11-16', '12:11:00', 1, '', '2018-11-16 02:52:07', '2018-11-16 02:52:07');
+(1, 1, 11, 600, '2018-11-16', '12:11:00', 1, '', '2018-11-16 02:52:07', '2018-11-16 02:52:07'),
+(2, 6, 16, 300, '2018-11-22', '12:30:00', 1, '', '2018-11-22 03:22:18', '2018-11-22 03:22:18'),
+(3, 7, 17, 300, '2018-11-22', '12:50:00', 1, '', '2018-11-22 03:23:18', '2018-11-22 03:23:18');
 
 -- --------------------------------------------------------
 
@@ -10399,7 +10414,7 @@ ALTER TABLE `article`
 -- Indexes for table `bank`
 --
 ALTER TABLE `bank`
-  ADD PRIMARY KEY (`con_id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `booking`
@@ -10413,7 +10428,7 @@ ALTER TABLE `booking`
 -- Indexes for table `branch`
 --
 ALTER TABLE `branch`
-  ADD PRIMARY KEY (`con_id`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `rou_id` (`rou_id`);
 
 --
@@ -10451,7 +10466,7 @@ ALTER TABLE `member`
 -- Indexes for table `member_type`
 --
 ALTER TABLE `member_type`
-  ADD PRIMARY KEY (`con_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `order`
@@ -10507,19 +10522,19 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `con_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `branch`
 --
 ALTER TABLE `branch`
-  MODIFY `con_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -10531,7 +10546,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `geographies`
@@ -10549,7 +10564,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `member_type`
 --
 ALTER TABLE `member_type`
-  MODIFY `con_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -10561,7 +10576,7 @@ ALTER TABLE `order`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `provinces`
