@@ -181,32 +181,5 @@
                 autoclose: true
             })
         });
-
-        function getDestination(id, val) {
-            $('#' + id).html('<option value=""> -- Select --</option>');
-            $.ajax({
-                type: 'GET',
-                url: '/ajax/getDestination/' + val,
-                dataType: 'json',
-                success: function (data) {
-                    $.each(data, function (k, v) {
-                        $('#' + id).append('<option value=' + v.con_id + '>' + v.con_name + '</option>');
-                    });
-                }
-            });
-        }
-
-        function getTravel(val) {
-            if (val == 2) {
-                $('#travel_date').prop('readonly', true);
-            } else {
-                $('#travel_date').prop('readonly', false);
-            }
-        }
-
-        function getChild() {
-            $('#net_child').prop('required', true);
-            $('#price_child').prop('required', true);
-        }
     </script>
 @stop

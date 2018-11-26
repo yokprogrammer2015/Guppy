@@ -35,12 +35,12 @@ class ConfigController extends Controller
         return view('config.category.list', $data);
     }
 
-    public function addCategory($con_id = 0)
+    public function addCategory($id = 0)
     {
-        $data = array('title' => 'Add Category', 'description' => 'Category', 'con_id' => $con_id, 'name' => '', 'name_th' => '');
+        $data = array('title' => 'Add Category', 'description' => 'Category', 'id' => $id, 'name' => '', 'name_th' => '');
 
-        if ($con_id != 0) {
-            $row = Category::where('id', $con_id)->first();
+        if ($id != 0) {
+            $row = Category::where('id', $id)->first();
             $data['name'] = $row->name;
             $data['name_th'] = $row->name_th;
         }
@@ -54,23 +54,23 @@ class ConfigController extends Controller
         $data['description'] = 'Bank';
         $data['name'] = $request->input('name');
 
-        $bank = $this->bank->where('con_name', '<>', '');
+        $bank = $this->bank->where('name', '<>', '');
         if ($data['name']) {
-            $bank->where('con_name', $data['name']);
+            $bank->where('name', $data['name']);
         }
-        $data['bank'] = $bank->orderBy('con_name', 'asc')->get();
+        $data['bank'] = $bank->orderBy('name', 'asc')->get();
 
         return view('config.bank.list', $data);
     }
 
-    public function addBank($con_id = 0)
+    public function addBank($id = 0)
     {
-        $data = array('title' => 'Add Bank', 'description' => 'Bank', 'con_id' => $con_id, 'con_name' => '', 'con_code' => '');
+        $data = array('title' => 'Add Bank', 'description' => 'Bank', 'id' => $id, 'name' => '', 'code' => '');
 
-        if ($con_id != 0) {
-            $row = Bank::where('con_id', $con_id)->first();
-            $data['con_name'] = $row->con_name;
-            $data['con_code'] = $row->con_code;
+        if ($id != 0) {
+            $row = Bank::where('id', $id)->first();
+            $data['name'] = $row->name;
+            $data['code'] = $row->code;
         }
 
         return view('config.bank.add', $data);
@@ -79,25 +79,25 @@ class ConfigController extends Controller
     public function save(Request $request)
     {
         $cat_id = $request->input('cat_id');
-        $con_id = $request->input('con_id');
-        $con_name = $request->input('con_name');
-        $con_code = $request->input('con_code');
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $code = $request->input('code');
         $name = $request->input('name');
         $name_th = $request->input('name_th');
 
         try {
             $db = $this->model->findBy($cat_id);
-            if ($con_id == 0) { // Insert
-                if ($con_name) $db->con_name = $con_name; // bank
-                if ($con_code) $db->con_code = $con_code; // bank
+            if ($id == 0) { // Insert
+                if ($name) $db->name = $name; // bank
+                if ($code) $db->code = $code; // bank
                 if ($name) $db->name = $name; // category
                 if ($name_th) $db->name_th = $name_th; // category
                 $db->save();
             } else { // Update
-                if ($con_name) $db->where('con_id', $con_id)->update(['con_name' => $con_name]); // bank
-                if ($con_code) $db->where('con_id', $con_id)->update(['con_code' => $con_code]); // bank
-                if ($name) $db->where('id', $con_id)->update(['name' => $name]); // category
-                if ($name_th) $db->where('id', $con_id)->update(['name_th' => $name_th]); // category
+                if ($name) $db->where('id', $id)->update(['name' => $name]); // bank
+                if ($code) $db->where('id', $id)->update(['code' => $code]); // bank
+                if ($name) $db->where('id', $id)->update(['name' => $name]); // category
+                if ($name_th) $db->where('id', $id)->update(['name_th' => $name_th]); // category
             }
             return redirect('config/' . $cat_id)->with('message', 'Successful!');
         } catch (\Exception $exception) {
@@ -105,13 +105,13 @@ class ConfigController extends Controller
         }
     }
 
-    public function remove($cat_id = null, $con_id = null)
+    public function remove($cat_id = null, $id = null)
     {
         try {
-            if ($cat_id && $con_id) {
+            if ($cat_id && $id) {
                 $db = $this->model->findBy($cat_id);
 
-                $db->where('con_id', $con_id)->delete();
+                $db->where('id', $id)->delete();
             }
             return redirect('config/' . $cat_id)->with('message', 'Remove Successful!');
         } catch (\Exception $exception) {

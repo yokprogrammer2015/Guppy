@@ -203,7 +203,7 @@
 </head>
 <body>
 <div id="page_title">
-    <div id="ds_type">{{ $type_name }} / {{ $category->con_name }}</div>
+    <div id="ds_type">{{ $type_name }} / {{ $category->name }}</div>
     <div id="ds_title">DAILY
         SALE REPORT
     </div>
@@ -251,7 +251,7 @@
         @endphp
         <tr>
             <td>{{ $row->ticket_no }}</td>
-            <td>{{ $row->departure->con_name }} - {{ $row->arrive->con_name }}</td>
+            <td>{{ $row->departure->name }} - {{ $row->arrive->name }}</td>
             <td>{{ $getFunction->DateFormat($row->travel_date, 's') }}</td>
             <td>{{ $row->agent->ag_name }}</td>
             <td>{{ $row->adult }}</td>

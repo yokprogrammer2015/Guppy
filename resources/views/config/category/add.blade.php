@@ -28,7 +28,7 @@
                 <form role="form" action="{{ url('config/save') }}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="cat_id" id="cat_id" value="category">
-                    <input type="hidden" name="con_id" id="con_id" value="{{ $con_id }}">
+                    <input type="hidden" name="id" id="id" value="{{ $id }}">
                     <div class="box-body">
                         <div class="form-group">
                             <label>Name</label>

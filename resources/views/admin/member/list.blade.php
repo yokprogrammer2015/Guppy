@@ -71,7 +71,7 @@
                                     <td>{{ $k+1 }}</td>
                                     <td>{{ $row->mb_name }}</td>
                                     <td>{{ $row->mb_email }}</td>
-                                    <td>{{ $row->memberType->con_name }}</td>
+                                    <td>{{ $row->memberType->name }}</td>
                                     <td>
                                         {!! html_entity_decode($row->status($row->mb_status)) !!}
                                     </td>

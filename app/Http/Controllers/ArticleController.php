@@ -6,6 +6,7 @@ use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Eventviva\ImageResize;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -104,8 +105,10 @@ class ArticleController extends Controller
                 ]);
             }
 
+            Log::info('Invoice Save : ' . serialize($request->all()));
             return redirect('article/list')->with('message', 'Successful!');
         } catch (\Exception $exception) {
+            Log::info('Article Save : ', $exception->getTrace());
             return $exception->getMessage();
         }
     }

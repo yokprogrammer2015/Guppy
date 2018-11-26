@@ -84,7 +84,7 @@
                             <select class="form-control" name="type_id" id="type_id" required>
                                 <option value=""> -- Select --</option>
                                 @foreach($memberType as $row)
-                                    <option value="{{ $row->con_id }}" @if($row->con_id==$type_id){{ 'selected' }}@endif>{{ $row->con_name }}</option>
+                                    <option value="{{ $row->id }}" @if($row->id==$type_id){{ 'selected' }}@endif>{{ $row->name }}</option>
                                 @endforeach
                             </select>
                         </div>

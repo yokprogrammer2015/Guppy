@@ -12,7 +12,7 @@ class Member extends Model
 
     public function MemberType()
     {
-        return $this->hasOne('App\Models\MemberType', 'con_id', 'type_id');
+        return $this->hasOne('App\Models\MemberType', 'id', 'type_id');
     }
 
     public function Status($type = 0, $label = null)

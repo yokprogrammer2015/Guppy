@@ -41,7 +41,7 @@ class AdminController extends Controller
         $data['province'] = $this->province->orderBy('name_th', 'asc')->get();
         $data['amphure'] = $this->amphure->orderBy('name_th', 'asc')->get();
         $data['district'] = $this->district->orderBy('name_th', 'asc')->get();
-        $data['memberType'] = MemberType::orderBy('con_name', 'asc')->get();
+        $data['memberType'] = MemberType::orderBy('name', 'asc')->get();
 
         if ($mb_id) {
             $row = $this->member->where('mb_id', $mb_id)->first();
@@ -97,7 +97,7 @@ class AdminController extends Controller
             Log::info('Invoice Save : ' . serialize($request->all()));
             return redirect('admin/member')->with('message', 'Successful!');
         } catch (\Exception $exception) {
-            Log::info('Invoice Save : ', $exception);
+            Log::info('Invoice Save : ', $exception->getTrace());
             return $exception->getMessage();
         }
     }

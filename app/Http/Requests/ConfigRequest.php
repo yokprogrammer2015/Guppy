@@ -25,7 +25,7 @@ class ConfigRequest extends FormRequest
     {
         return [
             'cat_id' => 'required',
-            'con_name' => 'required',
+            'name' => 'required',
         ];
     }
 }

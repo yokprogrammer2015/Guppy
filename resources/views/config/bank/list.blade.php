@@ -72,15 +72,15 @@
                             @foreach($bank as $k=>$row)
                                 <tr role="row">
                                     <td width="5%">{{ $k+1 }}</td>
-                                    <td>{{ $row->con_name }}</td>
-                                    <td>{{ $row->con_code }}</td>
+                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->code }}</td>
                                     <td width="5%">
-                                        <a href="{{ url('config/add/bank/'.$row->con_id) }}">
+                                        <a href="{{ url('config/add/bank/'.$row->id) }}">
                                             <button type="button" class="btn btn-sm btn-primary">Edit</button>
                                         </a>
                                     </td>
                                     <td width="5%">
-                                        <a href="{{ url('config/remove/bank/'.$row->con_id) }}"
+                                        <a href="{{ url('config/remove/bank/'.$row->id) }}"
                                            onclick="return confirm('Are you sure you want to delete this item?');">
                                             <button type="button" class="btn btn-sm btn-danger">Delete</button>
                                         </a>

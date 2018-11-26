@@ -233,7 +233,7 @@
                 <tr>
                     <td>{{ $k+1 }}</td>
                     <td>{{ $row->order->voucher_no }}</td>
-                    <td>{{ $row->route->con_code }} - {{ $row->routeTo->con_code }}</td>
+                    <td>{{ $row->route->code }} - {{ $row->routeTo->code }}</td>
                     <td>{{ $row->order->adult }}</td>
                     <td>{{ $row->order->child }}</td>
                     <td>{{ $row->order->price_adult }}</td>

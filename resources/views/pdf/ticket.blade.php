@@ -69,14 +69,14 @@
     @endphp
     <table width="100%">
         <tr>
-            <td width="25%"><strong id="text-h1">ADV ./</strong> <strong>{{ $row->branch->con_name }}</strong></td>
+            <td width="25%"><strong id="text-h1">ADV ./</strong> <strong>{{ $row->branch->name }}</strong></td>
             <td><strong>EXCHANGE VOUCHER</strong></td>
             <td width="25%"><strong>NO {{ $row->ticket_no }}</strong></td>
         </tr>
         <tr>
             <td><strong>SERVICE ORDER TO</strong></td>
             <td colspan="2">
-                <div class="text-left">ADV {{ $row->serviceBranch->con_name }} / TEL : {{ $row->serviceBranch->phone }}
+                <div class="text-left">ADV {{ $row->serviceBranch->name }} / TEL : {{ $row->serviceBranch->phone }}
                     Fax : {{ $row->serviceBranch->fax }}</div>
             </td>
         </tr>
@@ -97,8 +97,8 @@
         <tr>
             <td rowspan="2"><strong>SERVICE DESCRIPTION</strong></td>
             <td colspan="2">
-                <div class="text-left">Transfer from {{ $row->departure->con_name }} - {{ $row->arrive->con_name }}.<br>
-                    Departure time: {{ $row->time->con_name }}.
+                <div class="text-left">Transfer from {{ $row->departure->name }} - {{ $row->arrive->name }}.<br>
+                    Departure time: {{ $row->time->name }}.
                 </div>
             </td>
         </tr>
@@ -123,14 +123,14 @@
     <div id="text-line"></div>
     <table width="100%">
         <tr>
-            <td width="25%"><strong id="text-h1">ADV ./</strong> <strong>{{ $row->branch->con_name }}</strong></td>
+            <td width="25%"><strong id="text-h1">ADV ./</strong> <strong>{{ $row->branch->name }}</strong></td>
             <td><strong>EXCHANGE VOUCHER</strong></td>
             <td width="25%"><strong>NO {{ $row->ticket_no }}</strong></td>
         </tr>
         <tr>
             <td><strong>SERVICE ORDER TO</strong></td>
             <td colspan="2">
-                <div class="text-left">ADV {{ $row->serviceBranch->con_name }} / TEL : {{ $row->serviceBranch->phone }}
+                <div class="text-left">ADV {{ $row->serviceBranch->name }} / TEL : {{ $row->serviceBranch->phone }}
                     Fax : {{ $row->serviceBranch->fax }}</div>
             </td>
         </tr>
@@ -151,8 +151,8 @@
         <tr>
             <td rowspan="2"><strong>SERVICE DESCRIPTION</strong></td>
             <td colspan="2">
-                <div class="text-left">Transfer from {{ $row->departure->con_name }} - {{ $row->arrive->con_name }}.<br>
-                    Departure time: {{ $row->time->con_name }}.
+                <div class="text-left">Transfer from {{ $row->departure->name }} - {{ $row->arrive->name }}.<br>
+                    Departure time: {{ $row->time->name }}.
                 </div>
             </td>
         </tr>
