@@ -116,6 +116,12 @@ class ArticleController extends Controller
     public function remove($id = null)
     {
         try {
+            $article = $this->article->where('id', $id)->first();
+            if ($article) {
+                $file = env('IMAGE_PATH') . $article->pic1;
+                @unlink($file);
+            }
+
             $this->article->where('id', $id)->delete();
             return redirect('article/list');
         } catch (\Exception $exception) {

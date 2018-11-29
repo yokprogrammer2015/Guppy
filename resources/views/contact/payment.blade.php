@@ -61,8 +61,8 @@
                                     <td><img src="{{ env('PAYMENT_PATH').'scb.png' }}" alt="ช่องทางการชำระเงิน"></td>
                                     <td>
                                         <p>ธนาคาร : ธนาคารไทยพาณิชย์ (SCB)</p>
-                                        <p>เลขที่บัญชี : XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-                                        <p>ชื่อบัญชี : ภุชงค์ บัวสด</p>
+                                        <p>เลขที่บัญชี : <strong>3172268118</strong></p>
+                                        <p>ชื่อบัญชี : <strong>ภุชงค์ บัวสด</strong></p>
                                         <p>ประเภท : บัญชีเงินฝากออมทรัพย์</p>
                                     </td>
                                 </tr>
