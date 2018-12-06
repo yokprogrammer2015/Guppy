@@ -59,4 +59,10 @@ class ContactController extends Controller
             return $exception->getMessage();
         }
     }
+
+    public function contactUs()
+    {
+        $data['title'] = 'ช่องทางติดต่อเรา';
+        return view('contact.contactUs', $data);
+    }
 }

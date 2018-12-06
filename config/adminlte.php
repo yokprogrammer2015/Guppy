@@ -124,6 +124,11 @@ return [
             'icon' => 'book',
         ],
         [
+            'text' => 'ช่องทางติดต่อเรา',
+            'url' => 'contactUs',
+            'icon' => 'home',
+        ],
+        [
             'text' => 'จัดการสินค้า',
             'icon' => 'plus-square',
             'submenu' => [

@@ -28,6 +28,8 @@ Route::post('booking/detail', 'BookingController@bookingDetail');
 Route::post('booking/save', 'BookingController@save');
 
 # Contact
+Route::get('contactUs', 'ContactController@contactUs');
+
 Route::get('contact/payment', 'ContactController@payment');
 
 Route::post('contact/payment/save', 'ContactController@save');
