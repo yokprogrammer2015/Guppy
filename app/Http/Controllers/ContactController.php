@@ -52,7 +52,12 @@ class ContactController extends Controller
                 'last_update' => now()
             ]);
 
-            Log::info('Payment Save : ', serialize($request->all()));
+            $Token = env('LINE_TOKEN');
+            $message = 'Booking ID : GT' . $booking_id . ' มีเงินเข้า ' . $amount . ' บาท';
+
+            $this->line_notify($Token, $message);
+
+            Log::info('Payment Save : booking_id | ' . $booking_id . ' | customer_id | ' . $customer_id . ' | amount | ' . $amount . ' | time | ' . $payTime);
             return redirect('guppy/list')->with('message', 'สั่งซื้อสำเร็จ! ทีมงานจะจัดส่งปลาภายใน 24 ชั่วโมง ขอบคุณค่ะ');
         } catch (\Exception $exception) {
             Log::info('Payment Save : ', $exception->getTrace());
@@ -63,6 +68,37 @@ class ContactController extends Controller
     public function contactUs()
     {
         $data['title'] = 'ช่องทางติดต่อเรา';
+        $data['keywords'] = 'หาซื้อปลาหางนกยูงเกรดได้ที่ไหน, ต้องการขายปลาหางนกยูงเกรด, ต้องการซื้อปลาหางนกยูงเกรดจำนวนมาก, ช่องทางจัดจำหน่าย, ฟาร์มปลาหางนกยูง';
+        $data['description'] = 'ติดต่อซื้อ-ขายปลาหางนกยูงเกรดจำนวนมาก หาซื้อปลาหางนกยูงเกรดได้ที่ไหน ต้องการขายปลาหางนกยูงเกรด';
         return view('contact.contactUs', $data);
+    }
+
+    public function line_notify($Token, $message)
+    {
+        $lineApi = $Token; // ใส่ token key ที่ได้มา
+        $mms = trim($message); // ข้อความที่ต้องการส่ง
+        date_default_timezone_set("Asia/Bangkok");
+        $chOne = curl_init();
+        curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+        // SSL USE
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+        //POST
+        curl_setopt($chOne, CURLOPT_POST, 1);
+        curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
+        curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+        $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $lineApi . '',);
+        curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($chOne);
+        //Check error
+        if (curl_error($chOne)) {
+            echo 'error:' . curl_error($chOne);
+        } else {
+            $result_ = json_decode($result, true);
+            echo "status : " . $result_['status'];
+            echo "message : " . $result_['message'];
+        }
+        curl_close($chOne);
     }
 }

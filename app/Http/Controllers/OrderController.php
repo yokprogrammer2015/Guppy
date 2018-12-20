@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $data['title'] = 'รายการสินค้า';
+        $data['title'] = 'ปลาหางนกยูง';
         $data['status'] = $request->input('status');
         $data['cat_id'] = $request->input('cat_id');
         $data['name'] = $request->input('name');
@@ -42,9 +42,9 @@ class OrderController extends Controller
             $order->where('status', $data['status']);
         }
         if ($data['name']) {
-            $order->where('name', $data['name']);
+            $order->where('name', 'like', '%' . $data['name'] . '%');
         }
-        $data['order'] = $order->orderBy('status', 'desc')->orderBy('id', 'desc')->get();
+        $data['order'] = $order->orderBy('status', 'desc')->orderBy('name', 'desc')->get();
 
         return view('order.list', $data);
     }
@@ -112,7 +112,7 @@ class OrderController extends Controller
             $pic3 = $request->file('pic3');
             $pic1_va3 = $request->input('pic1_va3');
             $today = date('Y-m-d');
-            $running = $this->order->genRunning();
+            $running = rand(1111111111, 9999999999);
 
             if ($request->input('type')) $type = $request->input('type'); else $type = 2;
             if ($request->input('expiredDate')) $expiredDate = $this->getFunction->convertDateFormat($request->input('expiredDate'));
@@ -197,7 +197,7 @@ class OrderController extends Controller
             return redirect('order/list')->with('message', 'Successful!');
         } catch (\Exception $exception) {
             Log::info('Order Save : ', $exception->getTrace());
-            return $exception->getMessage();
+            return redirect('order/list')->with('message', 'Successful!');
         }
     }
 

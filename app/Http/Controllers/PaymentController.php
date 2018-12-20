@@ -24,6 +24,8 @@ class PaymentController extends Controller
     public function index()
     {
         $data['title'] = 'สถานะสินค้า';
+        $data['keywords'] = 'เช็คสถานะการส่งปลา, รายการส่งปลาหางนกยูง, EMS ส่งปลา, Kerry ส่งปลา';
+        $data['description'] = 'สถานะการส่งปลาหางนกยูงวันนี้ ทาง EMS และ Kerry';
         $data['payment'] = $this->payment->orderBy('payDate')->get();
 
         return view('payment.list', $data);

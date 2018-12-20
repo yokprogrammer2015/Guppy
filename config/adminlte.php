@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
 
     'logout_url' => 'logout',
 
@@ -114,14 +114,14 @@ return [
             'icon' => 'list-ol',
         ],
         [
-            'text' => 'สถานะสินค้า',
-            'url' => 'payment/list',
-            'icon' => 'cart-plus',
-        ],
-        [
             'text' => 'บทความ',
             'url' => 'article/list',
             'icon' => 'book',
+        ],
+        [
+            'text' => 'สถานะสินค้า',
+            'url' => 'payment/list',
+            'icon' => 'cart-plus',
         ],
         [
             'text' => 'ช่องทางติดต่อเรา',

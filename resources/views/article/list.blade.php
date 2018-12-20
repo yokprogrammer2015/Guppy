@@ -1,6 +1,8 @@
 @extends('adminlte::page')
 
 @section('title', $title)
+@section('keywords', $keywords)
+@section('description', $description)
 
 @section('content_header')
     <h1>{{ $title }}</h1>
@@ -86,7 +88,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $row->topic }}</td>
-                                    <td>{{ $row->detail }}</td>
+                                    <td>{!! $row->detail !!}</td>
                                     <td>{{ $row->creation_date }}</td>
                                     @if(session('mb_type')==1)
                                         <td>

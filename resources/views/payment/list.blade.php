@@ -1,6 +1,8 @@
 @extends('adminlte::page')
 
 @section('title', $title)
+@section('keywords', $keywords)
+@section('description', $description)
 
 @section('content_header')
     <h1>{{ $title }}</h1>

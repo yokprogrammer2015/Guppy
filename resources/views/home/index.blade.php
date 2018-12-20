@@ -1,6 +1,8 @@
 @extends('adminlte::page')
 
 @section('title', $title)
+@section('keywords', $keywords)
+@section('description', $description)
 
 @section('content_header')
     <h1>{{ $title }}</h1>
@@ -86,7 +88,7 @@
                                     </td>
                                     <td>{{ $row->category->name }}</td>
                                     <td>{{ $row->name }}</td>
-                                    <td>{{ $row->remark }}</td>
+                                    <td>{!! $row->remark !!}</td>
                                     <td>{{ $row->qty }}</td>
                                     <td>{{ $row->price }}</td>
                                     <td>

@@ -46,7 +46,7 @@ class BookingController extends Controller
 
             if ($order_id) {
                 $order = $this->order->select('price')->where('id', $order_id)->first();
-                if (count($order)) {
+                if ($order->price) {
                     $amount = $order->price * $numberSet;
                 }
             }

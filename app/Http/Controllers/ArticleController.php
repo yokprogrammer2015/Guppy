@@ -21,12 +21,14 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
-        $data['title'] = 'บทความ';
+        $data['title'] = 'บทความเกี่ยวกับปลาหางนกยูง';
+        $data['keywords'] = 'วิธีการเลี้ยงปลาหางนกยูง, สายพันธุ์ปลาหางนกยูง, การอนุบาลลูกปลา, คัดเลือกพ่อพันธุ์แม่พันธุ์, ช่องทางการจัดจำหน่ายปลา, อาหารปลา, สาระความรู้เรื่องปลาหางนกยูง';
+        $data['description'] = 'แหล่งรวบรวมความรู้เกี่ยวกับปลาหางนกยูงทั้งสายพันธุ์ในประเทศ และต่างประเทศ เปิดเว็ปเดียวรู้ทุกเรื่องของปลาหางนกยูง';
         $data['topic'] = $request->input('topic');
 
         $article = $this->article->where('id', '<>', '');
         if ($data['topic']) {
-            $article->where('topic', $data['topic']);
+            $article->where('topic', 'like', '%' . $data['topic'] . '%');
         }
         $data['article'] = $article->orderBy('creation_date')->get();
         return view('article.list', $data);
@@ -109,7 +111,7 @@ class ArticleController extends Controller
             return redirect('article/list')->with('message', 'Successful!');
         } catch (\Exception $exception) {
             Log::info('Article Save : ', $exception->getTrace());
-            return $exception->getMessage();
+            return redirect('article/list')->with('message', 'Successful!');
         }
     }
 
