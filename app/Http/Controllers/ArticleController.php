@@ -34,9 +34,27 @@ class ArticleController extends Controller
         return view('article.list', $data);
     }
 
+    public function detail($id = null)
+    {
+        try {
+            $article = $this->article->where('id', $id)->first();
+            if ($article->id) {
+                $data['title'] = $article->topic;
+                $data['keywords'] = $article->keywords;
+                $data['description'] = $article->topic;
+                $data['topic'] = $article->topic;
+                $data['detail'] = $article->detail;
+                $data['pic1'] = $article->pic1;
+                return view('article.detail', $data);
+            }
+        } catch (\Exception $exception) {
+            return redirect()->back();
+        }
+    }
+
     public function add($id = null)
     {
-        $data = array('id' => $id, 'topic' => '', 'detail' => '', 'pic1' => '');
+        $data = array('id' => $id, 'topic' => '', 'detail' => '', 'pic1' => '', 'keywords' => '');
         $data['title'] = 'เพิ่มบทความ';
         $data['description'] = 'กรุณากรอกข้อมูลให้ครบถ้วน';
 
@@ -46,6 +64,8 @@ class ArticleController extends Controller
                 $data['topic'] = $row->topic;
                 $data['detail'] = $row->detail;
                 $data['pic1'] = $row->pic1;
+                $data['pic1_val'] = $row->pic1;
+                $data['keywords'] = $row->keywords;
             }
         }
 
@@ -73,6 +93,7 @@ class ArticleController extends Controller
         $detail = $request->detail;
         $pic1 = $request->file('pic1');
         $pic1_val = $request->input('pic1_val');
+        $keywords = $request->input('keywords');
         $running = 'article' . rand(1111111111, 9999999999);
 
         if ($pic1_val) {
@@ -94,6 +115,7 @@ class ArticleController extends Controller
                     'topic' => $topic,
                     'detail' => $detail,
                     'pic1' => $this->image1,
+                    'keywords' => $keywords,
                     'creation_date' => now(),
                     'last_update' => now()
                 ]);
@@ -102,6 +124,7 @@ class ArticleController extends Controller
                     'topic' => $topic,
                     'detail' => $detail,
                     'pic1' => $this->image1,
+                    'keywords' => $keywords,
                     'creation_date' => now(),
                     'last_update' => now()
                 ]);

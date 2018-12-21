@@ -120,6 +120,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
                     <h4 class="modal-title"></h4>
+                    <small>หมายเหตุ ปลาที่ท่านได้รับเป็นปลาสายพันธุ์เดียวกันกับในภาพ
+                        จะมีลักษณะคล้ายปลาในภาพนี้แต่ไม่ใช่ปลาตัวนี้
+                    </small>
                 </div>
                 <div class="modal-body">
                     <p id="showImage"></p>

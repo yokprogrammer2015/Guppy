@@ -38,7 +38,7 @@ class HomeController extends Controller
         if ($data['name']) {
             $order->where('name', 'like', '%' . $data['name'] . '%');
         }
-        $data['order'] = $order->orderBy('status', 'desc')->orderBy('id', 'desc')->get();
+        $data['order'] = $order->orderBy('status', 'desc')->orderBy('name', 'asc')->get();
 
         return view('home.index', $data);
     }

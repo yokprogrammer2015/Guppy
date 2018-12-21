@@ -40,6 +40,8 @@ Route::any('payment/list', 'PaymentController@index');
 # Article
 Route::any('article/list', 'ArticleController@index');
 
+Route::get('article/detail/{id?}', 'ArticleController@detail');
+
 # Permission
 Route::post('login', 'PermissionController@checkLogin');
 

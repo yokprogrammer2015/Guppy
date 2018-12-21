@@ -39,14 +39,22 @@
                         <div class="form-group">
                             <label>รายละเอียด</label>
                             <textarea name="detail" class="form-control" id="detail" cols="30"
-                                      rows="3" placeholder="รายละเอียด">{{ $detail }}</textarea>
+                                      rows="5" placeholder="รายละเอียด">{{ $detail }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>รูป</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
                                 <input type="file" class="form-control" name="pic1" id="pic1">
-                                <input type="hidden" name="pic1_val" id="pic1_val" value="">
+                                <input type="hidden" name="pic1_val" id="pic1_val" value="{{ $pic1_val }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Keywords</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                <input type="text" class="form-control" name="keywords" id="keywords"
+                                       value="{{ $keywords }}">
                             </div>
                         </div>
                     </div>

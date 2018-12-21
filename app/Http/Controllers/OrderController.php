@@ -44,7 +44,7 @@ class OrderController extends Controller
         if ($data['name']) {
             $order->where('name', 'like', '%' . $data['name'] . '%');
         }
-        $data['order'] = $order->orderBy('status', 'desc')->orderBy('name', 'desc')->get();
+        $data['order'] = $order->orderBy('status', 'desc')->orderBy('name', 'asc')->get();
 
         return view('order.list', $data);
     }

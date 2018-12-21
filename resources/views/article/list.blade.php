@@ -82,12 +82,14 @@
                                     <td>{{ $k+1 }}</td>
                                     <td>
                                         @if($row->pic1)
-                                            <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}"
-                                                 style="cursor: pointer" class="img-thumbnail"
-                                                 onclick="getImage({{$row->id.',1'}})">
+                                            <a href="{{ url('article/detail/'.$row->id) }}">
+                                                <img src="{{ '/'.env('THUMBNAIL_PATH').$row->pic1 }}"
+                                                     style="cursor: pointer" class="img-thumbnail">
+                                            </a>
                                         @endif
                                     </td>
-                                    <td>{{ $row->topic }}</td>
+                                    <td><a href="{{ url('article/detail/'.$row->id) }}"
+                                           class="text-black">{{ $row->topic }}</a></td>
                                     <td>{!! $row->detail !!}</td>
                                     <td>{{ $row->creation_date }}</td>
                                     @if(session('mb_type')==1)
@@ -114,25 +116,6 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="modal-default" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-                    <p id="showDetail"></p>
-                    <p id="showImage"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">ปิด</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @stop
 
 @section('css')
@@ -151,23 +134,5 @@
                 'autoWidth': false
             })
         });
-
-        function getImage(id) {
-            $('#modal-default').modal('show');
-            $('.modal-title').html('');
-            $('#showImage').html('');
-            $.ajax({
-                type: 'GET',
-                url: '/api/getImageArticle?articleId=' + id,
-                dataType: 'json',
-                success: function (data) {
-                    $.each(data.data, function (index, element) {
-                        $('#showDetail').append(element.detail);
-                        $('#showImage').append('<img src="/' + element.pic1 + '" class="img-thumbnail">');
-                        $('.modal-title').append(element.topic);
-                    });
-                }
-            });
-        }
     </script>
 @stop
