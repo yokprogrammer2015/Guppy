@@ -161,7 +161,7 @@
             })
         });
 
-        function getImage(id, pic) {
+        const getImage = (id, pic) => {
             $('#modal-default').modal('show');
             $('.modal-title').html('');
             $('#showImage').html('');
@@ -189,12 +189,12 @@
             });
         }
 
-        function numberSet(val) {
+        const numberSet = (val) => {
             $('#numberSet').val(val);
         }
 
-        function saveBooking(order_id) {
-            var id = order_id;
+        const saveBooking = (order_id) => {
+            let id = order_id;
             $('#order_id').val(id);
             $('#saveBooking').submit();
         }

@@ -54,7 +54,7 @@ class ArticleController extends Controller
 
     public function add($id = null)
     {
-        $data = array('id' => $id, 'topic' => '', 'detail' => '', 'pic1' => '', 'keywords' => '');
+        $data = array('id' => $id, 'topic' => '', 'detail' => '', 'pic1' => '', 'pic1_val' => '', 'keywords' => '');
         $data['title'] = 'เพิ่มบทความ';
         $data['description'] = 'กรุณากรอกข้อมูลให้ครบถ้วน';
 
