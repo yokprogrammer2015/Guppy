@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label>รายละเอียด</label>
                             <textarea name="detail" class="form-control" id="detail" cols="30"
-                                      rows="5" placeholder="รายละเอียด">{{ $detail }}</textarea>
+                                      rows="10" placeholder="รายละเอียด">{{ $detail }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>รูป</label>
@@ -67,11 +67,16 @@
         </div>
     </div>
 @stop
-
+<link rel="stylesheet" href="{{ asset('css/bootstrap3-wysihtml5.min.css') }}">
 @section('css')
 
 @stop
 
 @section('js')
-
+    <script src="{{ asset('js/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#detail').wysihtml5()
+        })
+    </script>
 @stop
